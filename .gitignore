@@ -1,2 +1,4 @@
-storage.db
+angular/node_modules
+server/storage.db
+.idea
 
