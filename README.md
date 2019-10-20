@@ -10,7 +10,7 @@ A rewrite of www-th3-z-xyz in Golang+Angular.
 * `go get github.com/labstack/echo` - Echo
 * `go get github.com/mattn/go-sqlite3` - SQLite3 driver
 * `sudo apt install npm` - NPM
-* `cd ui; npm install` - Angular dependencies
+* `cd ui; npm install; cd ..` - Angular dependencies
 
 ## Building
 
