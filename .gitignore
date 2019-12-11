@@ -1,6 +1,2 @@
-angular/node_modules
-server/storage.db
-server/server
-ui/dist
 .idea
-
+storage.db

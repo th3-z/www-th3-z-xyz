@@ -1,18 +1,8 @@
 build:
-	@cd ./ui; \
-	ng build
-	@cd server; \
-	go build server.go
-
-test:
-	@cd ./ui; \
-	ng test
-
-e2e:
-	@cd ./ui; \
-	ng e2e
+	@go build -o th3-z-xyz main.go
 
 run:
-	@cd server;\
-	./server
+	@./th3-z-xyz
 
+clean:
+	@rm th3-z-xyz

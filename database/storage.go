@@ -1,12 +1,11 @@
-package main
+package database
 
 import (
 	"database/sql"
-	"github.com/labstack/echo"
-	_ "github.com/mattn/go-sqlite3"
+	_"github.com/mattn/go-sqlite3"
 )
 
-func initDB(filepath string) *sql.DB {
+func InitDB(filepath string) *sql.DB {
 	db, err := sql.Open("sqlite3", filepath)
 
 	if err != nil {
@@ -14,13 +13,13 @@ func initDB(filepath string) *sql.DB {
 	}
 
 	if db == nil {
-		panic("db nil")
+		panic("Couldn't init database - db nil")
 	}
 
 	return db
 }
 
-func migrate(db *sql.DB) {
+func Migrate(db *sql.DB) {
 	query := `
         CREATE TABLE IF NOT EXISTS tasks(
             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -33,16 +32,4 @@ func migrate(db *sql.DB) {
 	if err != nil {
 		panic(err)
 	}
-}
-
-func main() {
-	db := initDB("storage.db")
-	migrate(db)
-
-    e := echo.New()
-
-	e.Static("/", "../ui/dist")
-	e.File("/", "../ui/dist/index.html")
-
-	e.Logger.Fatal(e.Start(":5555"))
 }
