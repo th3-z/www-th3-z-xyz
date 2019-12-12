@@ -18,7 +18,10 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 }
 
 func routes(e *echo.Echo) {
-	e.GET("/hello", handlers.Hello)
+	e.GET("/hello", handlers.Index)
+
+	e.Static("/styles", "public/styles")
+	e.Static("/scripts", "public/scripts")
 }
 
 func main() {
