@@ -1,8 +1,8 @@
 build:
-	@go build -o th3-z-xyz main.go
+	@go build -o server server.go
 
 run:
-	@./th3-z-xyz
+	@./server
 
 clean:
-	@rm th3-z-xyz
+	@rm server

@@ -1,11 +1,35 @@
 {{define "footer"}}
 <footer>
     <div class="row">
-        <p>Test footer</p>
-        <ul>
-            <li>
-                <a href="https://files.th3-z.xyz/standing/the_z.pub">Public key</a></li>
-        </ul>
+        <div class="col cell3of5">
+            <p>
+                Website built and maintained by <strong>th3-z</strong> (the_z).<br/>
+                Source code available on <a href="https://github.com/th3-z/beta-th3-z-xyz">Github</a>.
+            </p>
+            <img src="/images/algiz.png" alt="algiz rune"/>
+        </div>
+        <div class="col cell1of5">
+            <ul>
+                <li>Public key - <a href="https://files.th3-z.xyz/standing/th3-z.pub">7ce05d3f8</a></li>
+                <li>Github - <a href="https://github.com/th3-z">th3-z</a></li>
+                <li>Steam - <a href="https://steamcommunity.com/id/th3-z/">th3-z</a></li>
+                <li>Email - <script language="JavaScript">
+                        // the_z (at) znel (period) org
+                        const a = "the_z";
+                        const b = "znel.org";
+                        const c = a + "@" + b;
+                        document.write("<a href='" + "mail" + "to:" + c + "'>" + c + "</a>");
+                </script><noscript>the_z (at) znel (period) org</noscript></li>
+            </ul>
+        </div>
+        <div class="col cell1of5">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/projects">Projects</a></li>
+                <li><a href="/pastes">Pastes</a></li>
+            </ul>
+        </div>
     </div>
 </footer>
 {{end}}

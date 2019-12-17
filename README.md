@@ -9,6 +9,7 @@ A rewrite of www-th3-z-xyz in Golang.
 * `sudo apt install make` - Make
 * `go get github.com/labstack/echo` - Echo
 * `go get github.com/mattn/go-sqlite3` - SQLite3 driver
+* `go get github.com/gomardown/markdown` - SQLite3 driver
 
 ## Building
 

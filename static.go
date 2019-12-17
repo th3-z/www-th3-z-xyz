@@ -6,8 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-
-	"./database"
+	"./storage"
 	"./handlers"
 	"html/template"
 	"io"
@@ -17,7 +16,17 @@ type Template struct {
 	templates *template.Template
 }
 
-func findAndParseTemplates(rootDir string, funcMap template.FuncMap) (*template.Template, error) {
+func FindAndRenderGraphs(rootDir string, funcMap template.FuncMap) (*template.Template, error) {
+    /*
+     * Render DOT files from /static/graphs to /static/images/graphs
+     */
+    return nil
+}
+
+func FindAndRenderMarkdown(rootDir string, funcMap template.FuncMap) (*template.Template, error) {
+    /*
+     * Render Md files from /static/markdown to /templates
+     */
 	cleanRoot := filepath.Clean(rootDir)
 	pfx := len(cleanRoot)+1
 	root := template.New("")
@@ -57,11 +66,13 @@ func routes(e *echo.Echo) {
 
 	e.Static("/styles", "static/styles")
 	e.Static("/scripts", "static/scripts")
+	e.Static("/vendor", "static/vendor")
+	e.Static("/images", "static/images/")
 }
 
 func main() {
-	db := database.InitDB("storage.db")
-	database.Migrate(db)
+	db := storage.InitDB("storage.db")
+	storage.Migrate(db)
 
 	t := &Template{
 		templates: template.Must(findAndParseTemplates("templates", nil)),

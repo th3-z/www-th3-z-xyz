@@ -320,13 +320,12 @@ footer {
     color: #BBB;
     font-size: 0.9em;
     margin: 0 -2.2em -3em;
-    padding: 1.5em 2em 1em 2em;
+    padding: 1.5em 2em 0.25em 2em;
 }
 footer a, footer a:visited { color: #80e0ff; }
-footer svg { margin: 0 0 0.7em; }
 footer ul { list-style: none; }
 footer li { border-bottom: 1px solid #555; }
-footer li a {display: block; font-size: 0.9em;}
+footer li a { font-size: 0.9em;}
 footer li a:hover { color: #EEE; text-decoration: none; }
 
 /* home */
