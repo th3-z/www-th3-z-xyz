@@ -1,0 +1,60 @@
+{{define "servers/index"}}
+    <!DOCTYPE html>
+    <html>
+    {{template "head" .}}
+    <body class="container" id="PAGE_TITLE">
+    {{template "navigation"}}
+    <div id="content">
+        <div class="wrap home">
+            <div class="row">
+                <h1>Game servers</h1>
+                <p>
+                    Information about game servers
+                </p>
+            </div>
+            <div class="row">
+                <div class="col cell1of7">
+                    <p>
+                        Testing, not sure what to do here.
+                    </p>
+                </div>
+                <div class="col cell6of7">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Status</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Capacity</th>
+                                <th>Public</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Service</td>
+                                <td>Status</td>
+                                <td>Name</td>
+                                <td>Address</td>
+                                <td>Capacity</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td>Service</td>
+                                <td>Status</td>
+                                <td>Name</td>
+                                <td>Address</td>
+                                <td>Capacity</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr/>
+            </div>
+        </div>
+    </div>
+    {{template "footer"}}
+    </body>
+    </html>
+{{end}}

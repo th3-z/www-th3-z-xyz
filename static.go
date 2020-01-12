@@ -55,32 +55,3 @@ func FindAndRenderMarkdown(rootDir string, funcMap template.FuncMap) (*template.
 
 	return root, err
 }
-
-func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-	return t.templates.ExecuteTemplate(w, name, data)
-}
-
-func routes(e *echo.Echo) {
-	e.GET("/", handlers.Index)
-	e.GET("/articles", handlers.Articles)
-
-	e.Static("/styles", "static/styles")
-	e.Static("/scripts", "static/scripts")
-	e.Static("/vendor", "static/vendor")
-	e.Static("/images", "static/images/")
-}
-
-func main() {
-	db := storage.InitDB("storage.db")
-	storage.Migrate(db)
-
-	t := &Template{
-		templates: template.Must(findAndParseTemplates("templates", nil)),
-	}
-
-	e := echo.New()
-	e.Renderer = t
-	routes(e)
-
-	e.Logger.Fatal(e.Start(":5555"))
-}
