@@ -2,8 +2,8 @@
     <!DOCTYPE html>
     <html>
     {{template "head" .}}
-    <body class="container" id="PAGE_TITLE">
-    {{template "navigation"}}
+    <body class="container" id="{{ .Page.Id}}">
+    {{template "navigation" .}}
     <div id="content">
         <div class="wrap home">
             <div class="row">
@@ -31,22 +31,16 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {{ range $server := .Servers}}
                             <tr>
-                                <td>Service</td>
+                                <td>{{ $server.Name }}</td>
                                 <td>Status</td>
                                 <td>Name</td>
-                                <td>Address</td>
+                                <td>{{ $server.Address}}</td>
                                 <td>Capacity</td>
                                 <td>No</td>
                             </tr>
-                            <tr>
-                                <td>Service</td>
-                                <td>Status</td>
-                                <td>Name</td>
-                                <td>Address</td>
-                                <td>Capacity</td>
-                                <td>No</td>
-                            </tr>
+                            {{ end }}
                         </tbody>
                     </table>
                 </div>
@@ -54,7 +48,7 @@
             </div>
         </div>
     </div>
-    {{template "footer"}}
+    {{template "footer" .}}
     </body>
     </html>
 {{end}}

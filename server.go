@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"./storage"
 	"./handlers"
+	"./storage"
 	"html/template"
 	"io"
 )
@@ -19,7 +19,7 @@ type Template struct {
 
 func findAndParseTemplates(rootDir string, funcMap template.FuncMap) (*template.Template, error) {
 	cleanRoot := filepath.Clean(rootDir)
-	pfx := len(cleanRoot)+1
+	pfx := len(cleanRoot) + 1
 	root := template.New("")
 
 	err := filepath.Walk(cleanRoot, func(path string, info os.FileInfo, e1 error) error {
@@ -72,6 +72,7 @@ func main() {
 	}
 
 	e := echo.New()
+	e.Debug = true
 	e.Renderer = t
 	routes(e)
 

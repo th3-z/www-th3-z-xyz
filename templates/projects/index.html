@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html>
 {{template "head" .}}
-<body class="container" id="PAGE_TITLE">
-    {{template "navigation"}}
+<body class="container" id="{{ .Page.Id}}">
+    {{template "navigation" .}}
     <div id="content">
         <div class="wrap home">
             <div class="row">
@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    {{template "footer"}}
+    {{template "footer" .}}
 </body>
 </html>
 {{end}}

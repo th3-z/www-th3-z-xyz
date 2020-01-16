@@ -5,16 +5,16 @@
         <label for="show-menu" class="show-menu">Show Menu</label>
         <input type="checkbox" id="show-menu"/>
         <ul>
-            <li class="active">
+            <li class="{{if eq .Page.SelectedTab 0}}active{{end}}">
                 <a href="/" >Home</a>
             </li>
-            <li class="">
+            <li class="{{if eq .Page.SelectedTab 1}}active{{end}}">
                 <a href="/projects" >Projects</a>
             </li>
-            <li class="">
+            <li class="{{if eq .Page.SelectedTab 2}}active{{end}}">
                 <a href="/servers" >Servers</a>
             </li>
-            <li class="">
+            <li class="{{if eq .Page.SelectedTab 3}}active{{end}}">
                 <a href="/articles" >Articles</a>
             </li>
         </ul>

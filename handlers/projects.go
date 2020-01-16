@@ -6,5 +6,15 @@ import (
 )
 
 func Projects(c echo.Context) error {
-	return c.Render(http.StatusOK, "projects/index", "")
+	data := struct {
+		Page Page
+	} {
+		Page: Page {
+			SelectedTab: 1,
+			Title:       "Projects",
+			Id:          "projects",
+		},
+	}
+
+	return c.Render(http.StatusOK, "projects/index", data)
 }

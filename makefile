@@ -7,7 +7,7 @@ run:
 	@./server
 
 clean:
-	@rm server
+	@rm -f server
 
 .PHONY: build clean run all
 
