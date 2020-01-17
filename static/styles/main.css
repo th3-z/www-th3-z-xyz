@@ -45,6 +45,11 @@
     padding: 0;
 }
 
+/* Hidden sections */
+.hidden {
+    display: none;
+}
+
 /* Horizontal rules */
 hr {
     clear: both;

@@ -2,4 +2,4 @@
 storage.db
 server
 go.sum
-
+bin/
