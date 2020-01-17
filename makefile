@@ -19,9 +19,16 @@ restart: kill before $(APP)
 
 build:
 	@go build -o $(APP) server.go
+	@rm -rf ./bin
+	@mkdir ./bin
+	@cp -r ./static ./bin
+	@cp -r ./templates ./bin
+	@cp ./README.md ./bin
+	@cp ./LICENSE ./bin
+	@cp ./server ./bin
 
 clean:
-	@kill `cat $(PID)` || true
+	@-kill `cat $(PID)` || true
 	@rm -f $(APP)
 
 .PHONY: build clean run all serve restart kill before
