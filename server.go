@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"./handlers"
-	"./storage"
+	"beta-th3-z-xyz/handlers"
+	"beta-th3-z-xyz/storage"
 	"html/template"
 	"io"
 )

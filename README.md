@@ -6,14 +6,14 @@ A rewrite of www-th3-z-xyz in Golang.
 
 ### Requirements
 
-* `sudo apt install make` - make
-* `sudo apt install fswatch` - fswatch
-* `go get .` - golang deps
+* make
+* fswatch - `sudo apt install fswatch`
 
 ## Building
 
-Run `make build`.
+Run `make build` to create a release in `./bin`.
 
 ### Running
 
-Run `make run` to start the server on 5555
+Run `make serve` to start the server on 5555.
+
