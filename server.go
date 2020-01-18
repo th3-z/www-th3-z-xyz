@@ -6,11 +6,13 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"io"
+    "time"
+    "fmt"
 
 	"beta-th3-z-xyz/handlers"
 	"beta-th3-z-xyz/storage"
 	"html/template"
-	"io"
 )
 
 type Template struct {
@@ -64,17 +66,20 @@ func routes(e *echo.Echo) {
 }
 
 func main() {
+    t := time.Now().UTC()
+
 	db := storage.InitDB("storage.db")
 	storage.Migrate(db)
 
-	t := &Template{
+	tpl := &Template{
 		templates: template.Must(findAndParseTemplates("templates", nil)),
 	}
 
 	e := echo.New()
 	e.Debug = true
-	e.Renderer = t
+	e.Renderer = tpl
 	routes(e)
 
+    fmt.Print("Start time: ", t.Format("Mon Jan 2 15:04:05"))
 	e.Logger.Fatal(e.Start(":5555"))
 }

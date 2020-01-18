@@ -21,9 +21,11 @@ func InitDB(filepath string) *sql.DB {
 
 func Migrate(db *sql.DB) {
 	query := `
-        CREATE TABLE IF NOT EXISTS tasks(
+        CREATE TABLE IF NOT EXISTS servers (
             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-            name VARCHAR NOT NULL
+            name VARCHAR NOT NULL,
+            address VARCHAR NOT NULL,
+            locked INT NOT NULL DEFAULT 0
         );
     `
 

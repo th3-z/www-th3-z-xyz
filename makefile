@@ -1,5 +1,4 @@
 PID = /tmp/beta-th3-z-xyz.pid
-SRC = $(wildcard *.go)
 APP = ./server
 
 serve: restart
@@ -11,10 +10,11 @@ kill:
 before:
 	@echo "pre-hook - TODO: Generate static assets"
 
-$(APP): $(SRC)
-	@go build -o $@ $?
+build-server:
+	@echo build -o server server.go
+	@go build -o server server.go
 
-restart: kill before $(APP)
+restart: kill before build-server
 	@$(APP) & echo $$! > $(PID)
 
 build:
@@ -30,6 +30,7 @@ build:
 clean:
 	@-kill `cat $(PID)` || true
 	@rm -f $(APP)
+	@rm -f storage.db
 
 .PHONY: build clean run all serve restart kill before
 
