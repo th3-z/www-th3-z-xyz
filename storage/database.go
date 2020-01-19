@@ -3,35 +3,85 @@ package storage
 import (
 	"database/sql"
 	_"github.com/mattn/go-sqlite3"
+	"os"
 )
 
+var Db *sql.DB
+
+
+type Queryer interface {
+	Query(string, ...interface{}) (*sql.Rows, error)
+	QueryRow(string, ...interface{}) *sql.Row
+	Prepare(string) (*sql.Stmt, error)
+	Exec(string, ...interface{}) (sql.Result, error)
+}
+
 func InitDB(filepath string) *sql.DB {
+	if _, err := os.Stat(filepath); err == nil {
+		os.Remove(filepath)
+	}
 	db, err := sql.Open("sqlite3", filepath)
 
 	if err != nil {
 		panic(err)
 	}
 
-	if db == nil {
-		panic("Couldn't init database - db nil")
-	}
-
 	return db
 }
 
-func Migrate(db *sql.DB) {
-	query := `
-        CREATE TABLE IF NOT EXISTS servers (
-            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-            name VARCHAR NOT NULL,
-            address VARCHAR NOT NULL,
-            locked INT NOT NULL DEFAULT 0
-        );
-    `
-
+func CreateSchema(db Queryer) {
+	query := schema  // storage/schema.go
 	_, err := db.Exec(query)
 
 	if err != nil {
 		panic(err)
 	}
+}
+
+func PreparedExec(db Queryer, query string, args ...interface{}) int64 {
+	stmt, err := db.Prepare(query)
+	if err != nil {
+		panic(err)
+	}
+
+	res, err := stmt.Exec(args...)
+	if err != nil {
+		panic(err)
+	}
+
+	insertId, err := res.LastInsertId()
+	if err == nil {
+		return insertId
+	}
+
+	affectedRows, err := res.RowsAffected()
+	if err == nil {
+		return affectedRows
+	}
+
+	return 0
+}
+
+func PreparedQuery(db Queryer, query string, args ...interface{}) *sql.Rows {
+	stmt, err := db.Prepare(query)
+	if err != nil {
+		panic(err)
+	}
+
+	rows, err := stmt.Query(args...)
+	if err != nil {
+		panic(err)
+	}
+
+	return rows
+}
+
+
+func PreparedQueryRow(db Queryer, query string, args ...interface{}) *sql.Row {
+	stmt, err := db.Prepare(query)
+	if err != nil {
+		panic(err)
+	}
+
+	return stmt.QueryRow(args...)
 }

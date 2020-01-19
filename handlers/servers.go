@@ -3,22 +3,35 @@ package handlers
 import (
 	"github.com/labstack/echo"
 	"net/http"
+	"beta-th3-z-xyz/storage"
 )
 
 type Server struct {
 	Name    string
 	Address string
+	Locked  int
 }
 
 func getServers() []Server {
-	return []Server{{
-			Name:    "vanilluxe",
-			Address: "vanilluxe.th3-z.xyz",
-		}, {
-			Name:    "KF2",
-			Address: "kf2.th3-z.xyz",
-		},
+	var servers []Server
+
+	rows := storage.PreparedQuery(
+		storage.Db,
+		"SELECT address, name, locked FROM server",
+	)
+	defer rows.Close()
+
+	for rows.Next() {
+		var server Server
+		err := rows.Scan(&server.Address, &server.Name, &server.Locked)
+		if err != nil {
+			panic(err)
+		}
+
+		servers = append(servers, server)
 	}
+
+	return servers
 }
 
 func Servers(c echo.Context) error {

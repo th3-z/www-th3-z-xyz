@@ -68,8 +68,9 @@ func routes(e *echo.Echo) {
 func main() {
     t := time.Now().UTC()
 
-	db := storage.InitDB("storage.db")
-	storage.Migrate(db)
+	storage.Db = storage.InitDB("storage.db")
+	storage.CreateSchema(storage.Db)
+	storage.SeedDb(storage.Db)
 
 	tpl := &Template{
 		templates: template.Must(findAndParseTemplates("templates", nil)),
