@@ -32,13 +32,6 @@
     font-family: 'opensans_italic';
     src: url('https://files.th3-z.xyz/standing/fonts/opensans-italic.woff2')    format('woff2');}
 
-.header-img {
-    width: auto;
-    max-width: 10%;
-    height: auto;
-    max-height: 10%;
-}
-
 /* Resets */
 * {
     margin: 0;
@@ -287,7 +280,7 @@ form {
 
 /* Header */
 header { margin: 0 -2em 1.5em; }
-header a img { display: block; margin: 1em auto 1.2em; padding-top: .6em; }
+header a img { display: block; margin: 1em auto 0.3em; }
 header span { position: absolute !important; top: -9999em !important; left: -9999em !important; }
 
 /* Navigation */

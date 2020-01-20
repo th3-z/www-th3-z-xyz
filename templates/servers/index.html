@@ -7,25 +7,28 @@
     <div id="content">
         <div class="wrap home">
             <div class="row">
-                <h1>Game servers</h1>
+                <h1>Servers and services</h1>
                 <p>
-                    Information about game servers
+                    This page details most of the public and private servers I operate. The servers listed here are
+                    operating on a long-term permanent basis. They are all hosted on my private infrastructure, I don't
+                    offer any hosting services.
                 </p>
             </div>
+            <div class="row" align="center">
+                <p>ゆっくりしてね！！！</p>
+            </div>
             <div class="row">
-                <div class="col cell1of7">
-                    <p>
-                        Testing, not sure what to do here.
-                    </p>
-                </div>
-                <div class="col cell6of7">
+                <p><strong>Game servers</strong></p>
+            </div>
+            <div class="row">
+                <div class="col cell1of1">
                     <table>
                         <thead>
                             <tr>
+                                <!-- TODO: Service icon -->
                                 <th>Service</th>
-                                <th>Status</th>
-                                <th>Name</th>
-                                <th>Address</th>
+                                <th>Status / Uptime</th>
+                                <th>Website / Address</th>
                                 <th>Capacity</th>
                                 <th>Public</th>
                             </tr>
@@ -33,18 +36,42 @@
                         <tbody>
                             {{ range $server := .Servers}}
                             <tr>
-                                <td>{{ $server.Name }}</td>
-                                <td>Status</td>
-                                <td>Name</td>
-                                <td>{{ $server.Address}}</td>
-                                <td>Capacity</td>
-                                <td>No</td>
+                                <td>{{ $server.Service }}</td>
+                                <td>Online (99%)</td>
+                                <td><a href="{{ $server.WebUrl }}">{{ $server.Name }}</a> ({{ $server.Address }})</td>
+                                <td>{{ $server.MaxPlayers }}</td>
+                                <td>{{ if $server.Locked }}Private{{ else }}Public{{end}}</td>
                             </tr>
                             {{ end }}
                         </tbody>
                     </table>
                 </div>
-                <hr/>
+            </div>
+
+            <div class="row">
+                <p><strong>Infrastructure</strong></p>
+            </div>
+            <div class="row">
+                <div class="col cell1of1">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Hostname / IP</th>
+                            <th>Status / Uptime</th>
+                            <th>OS</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{ range $infrastructure := .Infrastructure}}
+                            <tr>
+                                <td>{{ $infrastructure.Hostname }} ({{ $infrastructure.Address }})</td>
+                                <td>Online (99%)</td>
+                                <td>{{ $infrastructure.Os }}</td>
+                            </tr>
+                        {{ end }}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

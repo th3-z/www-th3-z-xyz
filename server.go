@@ -69,6 +69,7 @@ func main() {
     t := time.Now().UTC()
 
 	storage.Db = storage.InitDB("storage.db")
+	defer storage.Db.Close()
 	storage.CreateSchema(storage.Db)
 	storage.SeedDb(storage.Db)
 
