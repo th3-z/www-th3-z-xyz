@@ -1,4 +1,4 @@
-package handlers
+package models
 
 type Page struct {
 	SelectedTab int

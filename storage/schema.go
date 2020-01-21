@@ -25,5 +25,5 @@ var schema = `
             repo_url VARCHAR NOT NULL,
             description VARCHAR NOT NULL
         );
-    `
+`
 
