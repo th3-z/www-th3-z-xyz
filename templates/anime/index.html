@@ -1,0 +1,54 @@
+{{define "anime/index"}}
+    <!DOCTYPE html>
+    <html>
+    {{template "head" .}}
+    <body class="container" id="{{ .Page.Id}}">
+    {{template "navigation" .}}
+    <div id="content">
+        <div class="wrap home">
+            <div class="row">
+                <h1>Anime</h1>
+                <p>
+                    This page details most of the public and private servers I operate. The servers listed here are
+                    operating on a long-term permanent basis. They are all hosted on my private infrastructure, I don't
+                    offer any hosting services.
+                </p>
+            </div>
+            <div class="row" align="center">
+                <p>ゆっくりしてね！！！</p>
+            </div>
+            <div class="row">
+                <p><strong>Game servers</strong></p>
+            </div>
+            <div class="row">
+                <div class="col cell1of1">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th> - </th>
+                                <th> - </th>
+                                <th> - </th>
+                                <th> - </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{ range $anime := .AnimeList}}
+                            <tr>
+                                <td>{{ $anime.SeriesTitle }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            {{ end }}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{template "footer" .}}
+    </body>
+    </html>
+{{end}}

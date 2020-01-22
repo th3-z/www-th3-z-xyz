@@ -1,5 +1,10 @@
 package storage
 
+import (
+    malparsers"github.com/th3-z/mal-sqlite-migrate/parsers"
+    malmodels"github.com/th3-z/mal-sqlite-migrate/models"
+    "io/ioutil"
+)
 
 const serverQuery = `
 	INSERT INTO server 
@@ -15,30 +20,42 @@ const infrastructureQuery = `
 		(?, ?, ?)
 `
 
-func SeedDb(Db Queryer) {
+func SeedDb(db Queryer) {
 	PreparedExec(
-		Db, serverQuery,
+		db, serverQuery,
 		"Vanilluxe", "Minecraft","vanilluxe.th3-z.xyz","https://vanilluxe.th3-z.xyz", 1, 4,
 	)
 
 	PreparedExec(
-		Db, serverQuery,
+		db, serverQuery,
 		"KF2-MA Dev Server", "Killing Floor 2", "kf2.th3-z.xyz", "https://kf2.th3-z.xyz", 1, 6,
 	)
 
 	PreparedExec(
-		Db, infrastructureQuery,
+		db, infrastructureQuery,
 		"beta.th3-z.xyz", "136.244.96.98", "Debian 10",
 	)
 
 	PreparedExec(
-		Db, infrastructureQuery,
+		db, infrastructureQuery,
 		"atlus.th3-z.xyz", "45.32.187.80", "Debian 10",
 	)
 
 	PreparedExec(
-		Db, infrastructureQuery,
+		db, infrastructureQuery,
 		"saturn.th3-z.xyz", "212.159.110.214", "KDE Neon",
 	)
+
+    animeXmlBytes, err := ioutil.ReadFile("storage/th3-z-anime-list.xml")
+    if err != nil {
+        panic(err)
+    }
+
+    var animeXml = string(animeXmlBytes)
+    var animeList = malparsers.ParseAnimeList(animeXml)
+
+    for _, anime := range animeList {
+        malmodels.AddSeries(db, &anime)
+    }
 
 }
