@@ -3,7 +3,9 @@ package storage
 import (
 	"database/sql"
 	_"github.com/mattn/go-sqlite3"
+	malstorage"github.com/th3-z/mal-sqlite-migrate/storage"
 	"os"
+    "strings"
 )
 
 var Db *sql.DB
@@ -30,7 +32,10 @@ func InitDB(filepath string) *sql.DB {
 }
 
 func CreateSchema(db Queryer) {
-	query := schema  // storage/schema.go
+	query := strings.Join([]string{
+        schema,  // storage/schema.go
+        malstorage.Schema,
+    }, "\n")
 	_, err := db.Exec(query)
 
 	if err != nil {
