@@ -1,6 +1,6 @@
-# beta.th3-z.xyz
+# www.th3-z.xyz
 
-A rewrite of www-th3-z-xyz in Golang.
+Source code for [my public homepage](https://www.th3-z.xyz).
 
 ## Setup
 
