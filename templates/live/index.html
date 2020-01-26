@@ -1,0 +1,50 @@
+{{define "live/index"}}
+<!DOCTYPE html>
+<html>
+{{template "head" .}}
+<body class="container" id="{{ .Page.Id}}">
+    {{template "navigation" .}}
+    <div id="content">
+        <div class="wrap home">
+            <div class="row">
+                <h1>Live streams</h1>
+                <p>
+                    Am I live streaming? Probably not. However if I am this is the place to look.
+                </p>
+            </div>
+            <div class="row">
+                <div class="col cell1of1">
+                    <video
+                        id="live"
+                        controls
+                        autoplay
+                        width="896"
+                        height="504"
+                    ></video>
+                    <script>
+                        var video = document.getElementById('live');
+                        if(Hls.isSupported()) {
+                            var hls = new Hls();
+                            hls.loadSource('https://vanilluxe.th3-z.xyz/hls/index.m3u8');
+                            hls.attachMedia(video);
+                            hls.on(Hls.Events.MANIFEST_PARSED,function() {
+                                video.play();
+                            });
+                        }
+                        else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                            video.src = 'https://vanilluxe.th3-z.xyz/hls/index.m3u8';
+                            video.addEventListener('loadedmetadata',function() {
+                                video.play();
+                            });
+                        }
+                    </script>
+                    <p><!-- Padding, I guess--></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {{template "footer" .}}
+</body>
+</html>
+{{end}}

@@ -14,5 +14,8 @@
         <script type="text/javascript" src="scripts/vendor/jquery.min.js"></script>
         <script type="text/javascript" src="scripts/vendor/datatables.min.js"></script>
     {{ end }}
+    {{ if eq .Page.SelectedTab 3 }}
+        <script type="text/javascript" src="scripts/vendor/hls.min.js"></script>
+    {{ end }}
 </head>
 {{end}}
