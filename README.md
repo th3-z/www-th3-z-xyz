@@ -1,6 +1,6 @@
-# www.th3-z.xyz
+# www-th3-z-xyz
 
-Source code for [my public homepage](https://www.th3-z.xyz).
+Source code for [my public homepage](https://www.th3-z.xyz). Features live stream, dynamic anime list, server details, project details, etc.
 
 ## Setup
 
