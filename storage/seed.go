@@ -1,9 +1,8 @@
 package storage
 
 import (
-    malparsers"github.com/th3-z/mal-sqlite-migrate/parsers"
-    malmodels"github.com/th3-z/mal-sqlite-migrate/models"
-    "io/ioutil"
+	"database/sql"
+	"github.com/th3-z/malgo"
 )
 
 const serverQuery = `
@@ -20,7 +19,7 @@ const infrastructureQuery = `
 		(?, ?, ?)
 `
 
-func SeedDb(db Queryer) {
+func SeedDb(db *sql.DB) {
 	PreparedExec(
 		db, serverQuery,
 		"Vanilluxe", "Minecraft","vanilluxe.th3-z.xyz","https://vanilluxe.th3-z.xyz", 1, 4,
@@ -46,16 +45,5 @@ func SeedDb(db Queryer) {
 		"saturn.th3-z.xyz", "212.159.110.214", "KDE Neon",
 	)
 
-    animeXmlBytes, err := ioutil.ReadFile("storage/th3-z-anime-list.xml")
-    if err != nil {
-        panic(err)
-    }
-
-    var animeXml = string(animeXmlBytes)
-    var animeList = malparsers.ParseAnimeList(animeXml)
-
-    for _, anime := range animeList {
-        malmodels.AddSeries(db, &anime)
-    }
-
+	malgo.MigrateFile(db, "storage/th3-z-anime-list.xml")
 }

@@ -33,9 +33,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{ range $anime := .AnimeList}}
+                            {{ range $review := .MalUser.Reviews}}
                             <tr>
-                                <td>{{ $anime.SeriesTitle }}</td>
+                                <td>{{ $review.Series.Name }}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>

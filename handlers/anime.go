@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"beta-th3-z-xyz/models"
-	malmodels"github.com/th3-z/mal-sqlite-migrate/models"
+	malmodels"github.com/th3-z/malgo/models"
 	"beta-th3-z-xyz/storage"
 	"github.com/labstack/echo"
 	"net/http"
@@ -11,14 +11,14 @@ import (
 func Anime(c echo.Context) error {
 	data := struct {
 		Page models.Page
-		AnimeList []malmodels.Anime
+		MalUser *malmodels.User
 	} {
-		Page: models.Page{
+		Page: models.Page {
 			SelectedTab: 4,
 			Title:       "Anime",
 			Id:          "anime",
 		},
-        AnimeList: malmodels.GetAnimeList(storage.Db),
+        MalUser: malmodels.SearchUser(storage.Db, "th3-z"),
 	}
 
 	return c.Render(http.StatusOK, "anime/index", data)
