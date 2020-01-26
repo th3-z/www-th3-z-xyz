@@ -9,32 +9,36 @@
             <div class="row">
                 <h1>Projects</h1>
                 <p>
-                    What I'm working on.
+                    Selected works from my <a href="https://github.com/th3-z">Github profile</a>. All my projects are
+                    licensed MIT. Enjoy.
                 </p>
-            </div>
-            <div class="row">
-                <p><strong>Software</strong></p>
             </div>
             <div class="row">
                 <div class="col cell1of1">
                     <table>
                         <thead>
                         <tr>
-                            <th>Service</th>
-                            <th>Status / Uptime</th>
-                            <th>Website / Address</th>
-                            <th>Capacity</th>
-                            <th>Public</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Repository</th>
+                            <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
+                            {{ range $project := .Projects}}
                             <tr>
-                                <td>?</td>
-                                <td>Online (99%)</td>
-                                <td>?</td>
-                                <td>?</td>
-                                <td>?</td>
+                                <td>
+                                    {{ if eq $project.ProjectUrl "" }}
+                                        {{ $project.Name }}
+                                    {{ else }}
+                                        <a href="{{ $project.ProjectUrl }}">{{ $project.Name }}</a>
+                                    {{end}}
+                                </td>
+                                <td>{{ $project.Description}}</td>
+                                <td><a href="{{ $project.RepoUrl }}">{{ $project.RepoUrl }}</a></td>
+                                <td>{{ $project.Status }}</td>
                             </tr>
+                            {{ end }}
                         </tbody>
                     </table>
                 </div>

@@ -23,7 +23,8 @@ var schema = `
             name VARCHAR NOT NULL,
             project_url VARCHAR NOT NULL,
             repo_url VARCHAR NOT NULL,
-            description VARCHAR NOT NULL
+            description VARCHAR NOT NULL,
+			status VARCHAR NOT NULL
         );
 `
 
