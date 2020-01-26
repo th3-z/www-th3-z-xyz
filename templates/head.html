@@ -3,7 +3,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>{{ .Page.Title }} | th3-z-xyz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <link rel="stylesheet" type="text/css" href="/styles/main.css">
-    <link rel="stylesheet" type="text/css" href="/scripts/common.js">
+    {{ if eq .Page.SelectedTab 4 }}
+        <link rel="stylesheet" type="text/css" href="styles/vendor/datatables.min.css"/>
+    {{ end }}
+
+    <script type="text/javascript" src="/scripts/common.js"></script>
+    {{ if eq .Page.SelectedTab 4 }}
+        <script type="text/javascript" src="scripts/vendor/jquery.min.js"></script>
+        <script type="text/javascript" src="scripts/vendor/datatables.min.js"></script>
+    {{ end }}
 </head>
 {{end}}

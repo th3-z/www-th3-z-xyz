@@ -18,28 +18,28 @@
                 <p>ゆっくりしてね！！！</p>
             </div>
             <div class="row">
-                <p><strong>Game servers</strong></p>
+                <p><strong>Anime list</strong></p>
             </div>
             <div class="row">
                 <div class="col cell1of1">
-                    <table>
+                    <table id="anime_list">
                         <thead>
                             <tr>
                                 <th>Title</th>
-                                <th> - </th>
-                                <th> - </th>
-                                <th> - </th>
-                                <th> - </th>
+                                <th>Type</th>
+                                <th>Score</th>
+                                <th>Status</th>
+                                <th>Episodes</th>
                             </tr>
                         </thead>
                         <tbody>
                             {{ range $review := .MalUser.Reviews}}
                             <tr>
                                 <td>{{ $review.Series.Name }}</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{ $review.Series.Type.Name }}</td>
+                                <td>{{ $review.Score }}</td>
+                                <td>{{ $review.Status.Name }}</td>
+                                <td>{{ $review.Series.Episodes }}</td>
                             </tr>
                             {{ end }}
                         </tbody>
@@ -50,5 +50,6 @@
     </div>
     {{template "footer" .}}
     </body>
+    <script type="text/javascript" src="scripts/pages/{{.Page.Id}}.js"></script>
     </html>
 {{end}}
