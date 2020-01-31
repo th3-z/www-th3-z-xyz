@@ -1,0 +1,31 @@
+{{define "pastes/index"}}
+<!DOCTYPE html>
+<html>
+{{template "head" .}}
+<body class="container" id="{{ .Page.Id}}">
+    {{template "navigation" .}}
+    <div id="content">
+        <div class="wrap home">
+            <div class="row">
+                <h1>Pastes</h1>
+                <p>
+                    Pastes are deleted after 3 days!
+                </p>
+            </div>
+            <div class="row">
+                <div class="col cell1of1">
+                    <input tpye="textarea"/>
+                    <ul>
+                        <li>pasteId</li>
+                        <li>pasteId</li>
+                    </ul>
+                    <p><!-- Padding, I guess--></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    {{template "footer" .}}
+</body>
+</html>
+{{end}}

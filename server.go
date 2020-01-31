@@ -60,6 +60,7 @@ func routes(e *echo.Echo) {
 	e.GET("/servers", handlers.Servers)
 	e.GET("/projects", handlers.Projects)
 	e.GET("/anime", handlers.Anime)
+	e.GET("/pastes", handlers.Pastes)
 
 	e.Static("/styles", "static/styles")
 	e.Static("/scripts", "static/scripts")
