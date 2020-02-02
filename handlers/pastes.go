@@ -9,12 +9,14 @@ import (
 func Pastes(c echo.Context) error {
 	data := struct {
 		Page models.Page
+		Pastes []models.Paste
 	} {
 		Page: models.Page{
 			SelectedTab: 5,
 			Title:       "Pastes",
 			Id:          "pastes",
 		},
+		Pastes: models.GetPastes(),
 	}
 
 	return c.Render(http.StatusOK, "pastes/index", data)

@@ -64,6 +64,7 @@ func routes(e *echo.Echo) {
 
 	e.Static("/styles", "static/styles")
 	e.Static("/scripts", "static/scripts")
+	e.Static("/pastes/files", "static/pastes")
 	e.Static("/vendor", "static/vendor")
 	e.Static("/images", "static/images/")
 }

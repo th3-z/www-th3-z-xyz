@@ -5,14 +5,17 @@ import (
 	"database/sql"
 	"time"
 	"errors"
+	"os"
 )
 
 type Paste struct {
 	Id int
-	UploaderId int
+	UploaderId string
 	Filename string
 	InsertDate time.Time
 }
+
+var pastesPath = "static/pastes/"
 
 var pastesMaxGlobal = 1000
 var pastesMaxUploader = 15
@@ -22,6 +25,13 @@ var pastesMaxSize = int64((1000 * 1000 * 1000 * 5) / pastesMaxGlobal)
 var pastesExpiration = int64(1*60*60*24*3)
 
 func deletePaste(db *sql.DB, paste *Paste) {
+	file := pastesPath + paste.Filename
+	err := os.Remove(file)
+
+	if err != nil {
+		panic(err)
+	}
+
 	query := `
 		DELETE FROM paste p
 		WHERE p.id = ?
@@ -39,7 +49,25 @@ func prunePastes(db *sql.DB, pastes []Paste) {
 }
 
 func checkLimits(content *string, uploaderId string) bool {
-	if len(GetPastes()) > pastesMaxGlobal {
+	// Length check in bytes is intentional
+	if int64(len(*content)) > pastesMaxSize {
+		return false
+	}
+
+	pastes := GetPastes()
+
+	if len(pastes) > pastesMaxGlobal {
+		return false
+	}
+
+	userPastes := 0
+	for _, paste := range pastes  {
+		if paste.UploaderId == uploaderId {
+			userPastes++
+		}
+	}
+
+	if userPastes > pastesMaxUploader {
 		return false
 	}
 
@@ -49,10 +77,31 @@ func checkLimits(content *string, uploaderId string) bool {
 func GetPastes() []Paste {
 	var pastes []Paste
 
+	rows := storage.PreparedQuery(
+		storage.Db,
+		"SELECT id, uploader_id, filename, insert_date FROM paste",
+	)
+	defer rows.Close()
+
+	for rows.Next() {
+		var paste Paste
+		var timestamp int64
+		err := rows.Scan(
+			&paste.Id, &paste.UploaderId, &paste.Filename, &timestamp,
+		)
+		if err != nil {
+			panic(err)
+		}
+
+		paste.InsertDate = time.Unix(timestamp, 0)
+		pastes = append(pastes, paste)
+	}
+
 	return pastes
 }
 
 func NewPaste(db *sql.DB, content *string, uploaderId string) (*Paste, error) {
+	// Move these outside of the function, into the handler
 	prunePastes(db, GetPastes())
 
 	if !checkLimits(content, uploaderId) {
