@@ -30,7 +30,7 @@ var schema = `
 		CREATE TABLE IF NOT EXISTS paste (
             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 			uploader_id VARCHAR NOT NULL,  -- Hash of IP address
-			filename VARCHAR NOT NULL,
+			filename VARCHAR NOT NULL UNIQUE,
 			insert_date INTEGER NOT NULL
         );
 `

@@ -2,7 +2,10 @@ package models
 
 import (
 	"beta-th3-z-xyz/storage"
+	"crypto/sha256"
 	"database/sql"
+	"encoding/hex"
+	"io/ioutil"
 	"time"
 	"errors"
 	"os"
@@ -48,9 +51,9 @@ func prunePastes(db *sql.DB, pastes []Paste) {
 	}
 }
 
-func checkLimits(content *string, uploaderId string) bool {
+func checkLimits(content []byte, uploaderId string) bool {
 	// Length check in bytes is intentional
-	if int64(len(*content)) > pastesMaxSize {
+	if int64(len(content)) > pastesMaxSize {
 		return false
 	}
 
@@ -100,14 +103,43 @@ func GetPastes() []Paste {
 	return pastes
 }
 
-func NewPaste(db *sql.DB, content *string, uploaderId string) (*Paste, error) {
+func NewPaste(db *sql.DB, content []byte, uploaderId string) (*Paste, error) {
 	// Move these outside of the function, into the handler
 	prunePastes(db, GetPastes())
 
 	if !checkLimits(content, uploaderId) {
 		return nil, errors.New("paste limit reached")
 	}
-	var paste Paste
 
-	return &paste, nil
+	h := sha256.New()
+	h.Write(content)
+	filename := hex.EncodeToString(h.Sum(nil))
+
+	query := `
+		INSERT INTO paste (
+			uploader_id,
+			filename,
+			insert_date
+		) VALUES (
+			?,
+			?,
+			UNIX_TIMESTAMP()
+	`
+
+	pasteId, err := storage.PreparedExec(
+		db, query, uploaderId, filename,
+	)
+
+	// Hash collided with another paste, return the existing one
+	if err != nil {
+		return SearchPaste(db, filename)
+	}
+
+	err = ioutil.WriteFile(pastesPath + filename, content, 0644)
+	if err != nil {
+		panic(err)
+	}
+
+
+	return GetPaste(db, pasteId)
 }
