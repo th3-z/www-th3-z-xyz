@@ -103,6 +103,47 @@ func GetPastes() []Paste {
 	return pastes
 }
 
+func GetPaste(db *sql.DB, pasteId int64) *Paste {
+	query := `
+		SELECT
+			id,
+			uploader_id,
+			filename,
+			insert_date
+		FROM
+			paste
+		WHERE
+			id = ?
+	`
+	row := storage.PreparedQueryRow(db, query, pasteId)
+
+	var paste Paste
+	row.Scan(&paste.Id, &paste.UploaderId, &paste.Filename, &paste.InsertDate)
+
+	return &paste
+}
+
+func SearchPaste(db *sql.DB, filename string) *Paste {
+	query := `
+		SELECT
+			id,
+			uploader_id,
+			filename,
+			insert_date
+		FROM
+			paste
+		WHERE
+			filename LIKE = ?
+	`
+	row := storage.PreparedQueryRow(db, query, filename)
+
+	var paste Paste
+	row.Scan(&paste.Id, &paste.UploaderId, &paste.Filename, &paste.InsertDate)
+
+	return &paste
+}
+
+
 func NewPaste(db *sql.DB, content []byte, uploaderId string) (*Paste, error) {
 	// Move these outside of the function, into the handler
 	prunePastes(db, GetPastes())
@@ -132,7 +173,7 @@ func NewPaste(db *sql.DB, content []byte, uploaderId string) (*Paste, error) {
 
 	// Hash collided with another paste, return the existing one
 	if err != nil {
-		return SearchPaste(db, filename)
+		return SearchPaste(db, filename), nil
 	}
 
 	err = ioutil.WriteFile(pastesPath + filename, content, 0644)
@@ -141,5 +182,5 @@ func NewPaste(db *sql.DB, content []byte, uploaderId string) (*Paste, error) {
 	}
 
 
-	return GetPaste(db, pasteId)
+	return GetPaste(db, pasteId), nil
 }
