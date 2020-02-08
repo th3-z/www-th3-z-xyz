@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"beta-th3-z-xyz/models"
+	"www-th3-z-xyz/models"
 	malmodels"github.com/th3-z/malgo/models"
-	"beta-th3-z-xyz/storage"
+	"www-th3-z-xyz/storage"
 	"github.com/labstack/echo"
 	"net/http"
 )

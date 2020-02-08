@@ -10,8 +10,8 @@ import (
     "time"
     "fmt"
 
-	"beta-th3-z-xyz/handlers"
-	"beta-th3-z-xyz/storage"
+	"www-th3-z-xyz/handlers"
+	"www-th3-z-xyz/storage"
 	"html/template"
 )
 

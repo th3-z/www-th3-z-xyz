@@ -1,7 +1,7 @@
 package models
 
 import (
-	"beta-th3-z-xyz/storage"
+	"www-th3-z-xyz/storage"
 )
 
 type Project struct {

@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"beta-th3-z-xyz/models"
+	"www-th3-z-xyz/models"
 	"github.com/labstack/echo"
 	"net/http"
 )

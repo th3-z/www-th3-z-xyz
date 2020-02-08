@@ -1,4 +1,4 @@
-PID = /tmp/beta-th3-z-xyz.pid
+PID = /tmp/www-th3-z-xyz.pid
 SRC = $(wildcard *.go)
 APP = ./server
 

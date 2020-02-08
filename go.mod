@@ -1,4 +1,4 @@
-module beta-th3-z-xyz
+module www-th3-z-xyz
 
 require (
 	github.com/labstack/echo v3.3.10+incompatible
