@@ -1,14 +1,14 @@
 package models
 
 import (
-	"www-th3-z-xyz/storage"
 	"crypto/sha256"
 	"database/sql"
 	"encoding/hex"
-	"io/ioutil"
-	"time"
 	"errors"
+	"io/ioutil"
 	"os"
+	"time"
+	"www-th3-z-xyz/storage"
 )
 
 type Paste struct {
@@ -32,6 +32,12 @@ func deletePaste(db *sql.DB, paste *Paste) {
 	err := os.Remove(file)
 
 	if err != nil {
+		query := `
+		DELETE FROM paste p
+		WHERE p.id = ?
+	`
+		storage.PreparedExec(db, query, paste.Id)
+
 		panic(err)
 	}
 
@@ -133,7 +139,7 @@ func SearchPaste(db *sql.DB, filename string) *Paste {
 		FROM
 			paste
 		WHERE
-			filename LIKE = ?
+			filename = ?
 	`
 	row := storage.PreparedQueryRow(db, query, filename)
 
@@ -164,11 +170,12 @@ func NewPaste(db *sql.DB, content []byte, uploaderId string) (*Paste, error) {
 		) VALUES (
 			?,
 			?,
-			UNIX_TIMESTAMP()
+			?
+		)
 	`
 
 	pasteId, err := storage.PreparedExec(
-		db, query, uploaderId, filename,
+		db, query, uploaderId, filename, time.Now().Unix(),
 	)
 
 	// Hash collided with another paste, return the existing one

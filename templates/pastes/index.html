@@ -14,8 +14,8 @@
             </div>
             <div class="row">
                 <p><strong>New paste</strong></p>
-                <form>
-                    <textarea rows="24" id="paste" style="width: 100%; resize: none"></textarea>
+                <form action="pastes/new" name="new_paste_form" method="post">
+                    <textarea rows="24" id="content" name="content" style="width: 100%; resize: none"></textarea>
                     <input type="submit" value="Create new paste"/>
                 </form>
             </div>

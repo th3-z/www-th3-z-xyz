@@ -26,12 +26,12 @@ const projectQuery = `
 		(?, ?, ?, ?, ?)
 `
 
-const pasteQuery = `
+/*const pasteQuery = `
 	INSERT INTO paste
 		(uploader_id, filename, insert_date)
 	VALUES
 		(?, ?, ?)
-`
+`(*/
 
 func SeedDb(db *sql.DB) {
 	PreparedExec(
@@ -79,11 +79,6 @@ func SeedDb(db *sql.DB) {
 	PreparedExec(
 		db, projectQuery,
 		"Public website", "", "https://github.com/th3-z/beta-th3-z-xyz", "You're looking at it", "Development",
-	)
-
-	PreparedExec(
-		db, pasteQuery,
-		"testUploader", "testPaste", 	1580683169,
 	)
 
 	malgo.MigrateFile(db, "storage/th3-z-anime-list.xml")
