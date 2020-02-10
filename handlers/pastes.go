@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"www-th3-z-xyz/models"
 	"github.com/labstack/echo"
 	"net/http"
@@ -25,7 +27,10 @@ func Pastes(c echo.Context) error {
 
 func NewPaste(c echo.Context) error {
 	content := []byte(c.FormValue("content"))
-	uploaderId := "test"
+
+	h := sha256.New()
+	h.Write([]byte(c.RealIP()))
+	uploaderId := hex.EncodeToString(h.Sum(nil))
 
 	paste, err := models.NewPaste(storage.Db, content, uploaderId)
 	if err != nil {

@@ -1,5 +1,13 @@
+# Editors
 .idea
+
+# Binaries
+bin/
 storage.db
 server
+
+# Generated
+static/pastes/*
+
+# Misc.
 go.sum
-bin/
