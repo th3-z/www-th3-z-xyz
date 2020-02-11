@@ -23,6 +23,8 @@ build:
 clean:
 	@kill `cat $(PID)` || true
 	@rm -f $(APP)
+	@rm -f storage.db
+	@rm -f static/pastes/*
 
 .PHONY: build clean run all serve restart kill before
 
