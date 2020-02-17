@@ -21,16 +21,16 @@
 /* Fonts */
 @font-face {
     font-family: 'opensans_light';
-    src: url('https://files.th3-z.xyz/standing/fonts/opensans-light.woff2')       format('woff2');}
+    src: url('https://www.th3-z.xyz/vensor/opensans/opensans-light.woff2')       format('woff2');}
 @font-face {
     font-family: 'opensans_regular';
-    src: url('https://files.th3-z.xyz/standing/fonts/opensans-regular.woff2')     format('woff2');}
+    src: url('https://www.th3-z.xyz/vendor/opensans/opensans-regular.woff2')     format('woff2');}
 @font-face {
     font-family: 'opensans_bold';
-    src: url('https://files.th3-z.xyz/standing/fonts/opensans-bold.woff2')        format('woff2');}
+    src: url('https://www.th3-z.xyz/vendor/opensans/opensans-bold.woff2')        format('woff2');}
 @font-face {
     font-family: 'opensans_italic';
-    src: url('https://files.th3-z.xyz/standing/fonts/opensans-italic.woff2')    format('woff2');}
+    src: url('https://www.th3-z.xyz/vendor/opensans/opensans-italic.woff2')    format('woff2');}
 
 /* Resets */
 * {

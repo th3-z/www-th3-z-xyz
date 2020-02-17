@@ -6,16 +6,16 @@
 
     <link rel="stylesheet" type="text/css" href="/styles/main.css">
     {{ if eq .Page.SelectedTab 4 }}
-        <link rel="stylesheet" type="text/css" href="styles/vendor/datatables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="/vendor/datatables/datatables.min.css"/>
     {{ end }}
 
     <script type="text/javascript" src="/scripts/common.js"></script>
     {{ if eq .Page.SelectedTab 4 }}
-        <script type="text/javascript" src="scripts/vendor/jquery.min.js"></script>
-        <script type="text/javascript" src="scripts/vendor/datatables.min.js"></script>
+        <script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/vendor/datatables/datatables.min.js"></script>
     {{ end }}
     {{ if eq .Page.SelectedTab 3 }}
-        <script type="text/javascript" src="scripts/vendor/hls.min.js"></script>
+        <script type="text/javascript" src="/vendor/hls/hls.min.js"></script>
     {{ end }}
 </head>
 {{end}}
