@@ -8,6 +8,8 @@ server
 
 # Generated
 static/pastes/*
+_*.html
 
-# Misc.
+# Language
 go.sum
+

@@ -9,7 +9,6 @@ import (
 	"github.com/gomarkdown/markdown/parser"
 )
 
-var mdOutputPath = "templates/"
 var mdOutputExt = ".html"
 
 func FindAndRenderGraphs(rootDir string) {
@@ -39,7 +38,7 @@ func FindAndRenderMarkdown(rootDir string) {
 			name := path[pfx:]
 
 			html := markdown.ToHTML(b, parser, nil)
-			filename := mdOutputPath + strings.TrimSuffix(name, filepath.Ext(name)) + mdOutputExt
+			filename := rootDir + strings.TrimSuffix(name, filepath.Ext(name)) + mdOutputExt
 			e3 := ioutil.WriteFile(filename, html, 0644)
 			if e3 != nil {
 				return e3
@@ -56,5 +55,6 @@ func FindAndRenderMarkdown(rootDir string) {
 }
 
 func main() {
-	FindAndRenderMarkdown("static/markdown")
+	FindAndRenderMarkdown("templates/")
 }
+
