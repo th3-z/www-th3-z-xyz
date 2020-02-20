@@ -14,14 +14,19 @@
             <li class="{{if eq .Page.SelectedTab 2}}active{{end}}">
                 <a href="/servers" >Servers</a>
             </li>
-            <li class="{{if eq .Page.SelectedTab 3}}active{{end}}">
-                <a href="/live" >Live</a>
+
+            <li class="{{if eq .Page.SelectedTab 5}}active{{end}}">
+                <a href="/articles" >Articles</a>
             </li>
+
             <li class="{{if eq .Page.SelectedTab 4}}active{{end}}">
-                <a href="/anime" >Anime List</a>
+                <a href="/anime" >Reviews</a>
             </li>
             <li style="float: right">
                 <a href="https://github.com/th3-z" ><i class="fab fa-git"></i></a>
+            </li>
+            <li class="{{if eq .Page.SelectedTab 3}}active{{end}}" style="float: right">
+                <a href="/live" ><i class="fas fa-desktop"></i></a>
             </li>
             <li class="{{if eq .Page.SelectedTab 5}}active{{end}}" style="float: right">
                 <a href="/pastes" ><i class="fas fa-paste"></i></a>

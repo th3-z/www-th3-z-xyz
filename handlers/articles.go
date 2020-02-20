@@ -11,7 +11,7 @@ func Articles(c echo.Context) error {
 		Page models.Page
 	} {
 		Page: models.Page{
-			SelectedTab: 3,
+			SelectedTab: 5,
 			Title:       "Articles",
 			Id:          "articles",
 		},
