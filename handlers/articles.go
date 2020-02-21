@@ -9,12 +9,14 @@ import (
 func Articles(c echo.Context) error {
 	data := struct {
 		Page models.Page
+		Articles []models.Article
 	} {
 		Page: models.Page{
 			SelectedTab: 5,
 			Title:       "Articles",
 			Id:          "articles",
 		},
+		Articles: models.GetArticles(),
 	}
 
 	return c.Render(http.StatusOK, "articles/index", data)
