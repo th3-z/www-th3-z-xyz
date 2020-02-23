@@ -16,7 +16,7 @@ func Articles(c echo.Context) error {
 			Title:       "Articles",
 			Id:          "articles",
 		},
-		Articles: models.GetArticles(),
+		Articles: models.GetArticles("templates/articles"),
 	}
 
 	return c.Render(http.StatusOK, "articles/index", data)

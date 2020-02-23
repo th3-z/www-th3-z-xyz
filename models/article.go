@@ -4,9 +4,10 @@ type Article struct{
 	Filename string
 }
 
-articlesPath = "/articles"
+var articlesPath = "/articles"
 
 func GetArticles(path string) []Article {
-	return nil
+	var articles []Article
+	return articles
 }
 
