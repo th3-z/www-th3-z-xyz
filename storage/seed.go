@@ -62,6 +62,10 @@ func SeedDb(db *sql.DB) {
 	)
 	PreparedExec(
 		db, projectQuery,
+		"Gloom", "https://github.com/th3-z/gloom-client", "https://github.com/th3-z/gloom-client", "File upload utility and server", "Released",
+	)
+	PreparedExec(
+		db, projectQuery,
 		"Malgo", "", "https://github.com/th3-z/malgo", "MyAnimeList SQL migration utility and Go library ", "Released",
 	)
 	PreparedExec(
