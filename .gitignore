@@ -1,5 +1,7 @@
 # Editors
 .idea
+*.swp
+www-th3-z-xyz
 
 # Binaries
 bin/

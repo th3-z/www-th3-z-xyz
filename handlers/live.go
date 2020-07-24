@@ -11,7 +11,7 @@ func Live(c echo.Context) error {
 		Page models.Page
 	} {
 		Page: models.Page{
-			SelectedTab: 3,
+			SelectedTab: 6,
 			Title:       "Live",
 			Id:          "Live",
 		},

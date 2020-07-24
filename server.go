@@ -73,6 +73,8 @@ func routes(e *echo.Echo) {
 func main() {
     t := time.Now().UTC()
 
+    os.Mkdir("static/pastes", 0775)
+
 	storage.Db = storage.InitDB("storage.db")
 	defer storage.Db.Close()
 	storage.CreateSchema(storage.Db)

@@ -15,7 +15,7 @@ func Pastes(c echo.Context) error {
 		Pastes []models.Paste
 	} {
 		Page: models.Page{
-			SelectedTab: 5,
+			SelectedTab: 7,
 			Title:       "Pastes",
 			Id:          "pastes",
 		},
