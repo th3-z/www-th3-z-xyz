@@ -22,6 +22,9 @@ func Pastes(c echo.Context) error {
 		Pastes: models.GetPastes(),
 	}
 
+    c.Response().Header().Set("Cache-Control", "no-store, must-revalidate")
+    c.Response().Header().Set("Expires", "0")
+
 	return c.Render(http.StatusOK, "pastes/index", data)
 }
 

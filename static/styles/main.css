@@ -160,7 +160,7 @@ html, header {
     line-height: 1.5; }
 .wrap {
     background: #FFF;
-    margin: -2.5em -2em -3em;
+    margin: -2.5em -2em 0;
     padding: 3em 2em 2.5em 2em;
 }
 
@@ -322,7 +322,7 @@ nav input[type=checkbox]:checked ~ ul { display: block; }
 
 /* Footer */
 footer {
-    background: #3f4654;
+    background: #3b384c;
     color: #BBB;
     font-size: 0.9em;
     margin: 0 -2.2em -3em;
@@ -335,7 +335,7 @@ footer li a { font-size: 0.9em;}
 footer li a:hover { color: #EEE; text-decoration: none; }
 
 /* home */
-.home { padding: 2.5em 2em 2.5em 2em; }
+.home { padding: 2.5em 2em 0 2em; }
 .home dt { margin: 1em 0 .3em; }
 
 /* teaser - those blocks at the bottom of the home page*/
