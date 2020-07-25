@@ -2,14 +2,15 @@ package storage
 
 import (
 	"database/sql"
+
 	"github.com/th3-z/malgo"
 )
 
 const serverQuery = `
 	INSERT INTO server 
-		(name, service, address, web_url, locked, max_players)
+		(name, service, address, image, web_url, locked, max_players)
 	VALUES
-		(?, ?, ?, ?, ?, ?)
+		(?, ?, ?, ?, ?, ?, ?)
 `
 
 const infrastructureQuery = `
@@ -26,30 +27,24 @@ const projectQuery = `
 		(?, ?, ?, ?, ?)
 `
 
-/*const pasteQuery = `
-	INSERT INTO paste
-		(uploader_id, filename, insert_date)
-	VALUES
-		(?, ?, ?)
-`(*/
-
 func SeedDb(db *sql.DB) {
 	PreparedExec(
 		db, serverQuery,
-		"Vanilluxe", "Minecraft","vanilluxe.th3-z.xyz","https://vanilluxe.th3-z.xyz", 1, 4,
+		"Vanilluxe MC", "Minecraft", "vanilluxe.th3-z.xyz", "images/servers/mc.png", "https://vanilluxe.th3-z.xyz", 1, 6,
 	)
 	PreparedExec(
 		db, serverQuery,
-		"KF2-MA Dev Server", "Killing Floor 2", "kf2.th3-z.xyz", "https://kf2.th3-z.xyz", 1, 6,
+		"Magicked Admin Dev Server", "Killing Floor 2", "kf2.th3-z.xyz", "images/servers/kf2.png", "https://kf2.th3-z.xyz", 1, 6,
+	)
+
+	PreparedExec(
+		db, serverQuery,
+		"Git", "Git", "git.th3-z.xyz", "images/servers/git.png", "https://git.th3-z.xyz", 0, 0,
 	)
 
 	PreparedExec(
 		db, infrastructureQuery,
-		"beta.th3-z.xyz", "136.244.96.98", "Debian 10",
-	)
-	PreparedExec(
-		db, infrastructureQuery,
-		"atlus.th3-z.xyz", "45.32.187.80", "Debian 10",
+		"atlus.th3-z.xyz", "136.244.96.98", "Debian 10",
 	)
 	PreparedExec(
 		db, infrastructureQuery,
@@ -62,7 +57,7 @@ func SeedDb(db *sql.DB) {
 	)
 	PreparedExec(
 		db, projectQuery,
-		"Gloom", "https://github.com/th3-z/gloom-client", "https://github.com/th3-z/gloom-client", "File upload utility and server", "Released",
+		"Gloom", "https://github.com/th3-z/gloom-client", "https://github.com/th3-z/gloom-client", "File upload utility and server", "Development",
 	)
 	PreparedExec(
 		db, projectQuery,

@@ -5,28 +5,28 @@ import (
 )
 
 type Server struct {
-	Name    string
+	Name       string
 	Service    string
-	Address string
-	WebUrl string
-	Locked  int
-	MaxPlayers  int
+	Address    string
+	Image      string
+	WebUrl     string
+	Locked     int
+	MaxPlayers int
 }
-
 
 func GetServers() []Server {
 	var servers []Server
 
 	rows := storage.PreparedQuery(
 		storage.Db,
-		"SELECT address, service, name, web_url, locked, max_players FROM server",
+		"SELECT address, service, name, image, web_url, locked, max_players FROM server",
 	)
 	defer rows.Close()
 
 	for rows.Next() {
 		var server Server
 		err := rows.Scan(
-			&server.Address, &server.Service, &server.Name, &server.WebUrl,
+			&server.Address, &server.Service, &server.Name, &server.Image, &server.WebUrl,
 			&server.Locked, &server.MaxPlayers,
 		)
 		if err != nil {
@@ -38,4 +38,3 @@ func GetServers() []Server {
 
 	return servers
 }
-

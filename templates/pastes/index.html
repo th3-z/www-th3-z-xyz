@@ -9,28 +9,29 @@
             <div class="row">
                 <h1>Pastes</h1>
                 <p>
-                    Pastes are deleted after 3 days!
+                    Pastes are automatically deleted after 3 days!
                 </p>
             </div>
-            <div class="row">
-                <p><strong>New paste</strong></p>
-                <form action="pastes/new" name="new_paste_form" method="post">
-                    <textarea rows="24" id="content" name="content" style="width: 100%; resize: none"></textarea>
-                    <input type="submit" value="Create new paste"/>
-                </form>
-            </div>
-            <div class="row">
-                <p><strong>Recent pastes</strong></p>
-                <ul>
-                    {{ range $paste:= .Pastes }}
-                        <li>
-                            {{ $paste.InsertDate }} -
-                            <a href="pastes/files/{{ $paste.Filename }}">
-                                {{ $paste.Filename }}
-                            </a>
-                        </li>
-                    {{ end }}
-                </ul>
+            <div class="row" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;">
+                <div style="flex-grow: 1; margin-right: 1em;">
+                    <p><strong>New paste</strong></p>
+                    <form action="pastes/new" name="new_paste_form" method="post">
+                        <textarea rows="24" id="content" name="content" style="width: 100%; resize: none"></textarea>
+                        <input type="submit" style="float: right;" value="Create new paste"/>
+                    </form>
+                </div>
+                <div>
+                    <p><strong>Recent pastes</strong></p>
+                    <ul>
+                        {{ range $paste:= .Pastes }}
+                            <li>
+                                <a href="pastes/files/{{ $paste.Filename }}">
+                                    {{ $paste.InsertDate.Format "2 Jan 2006 15:04:05" }}
+                                </a>
+                            </li>
+                        {{ end }}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

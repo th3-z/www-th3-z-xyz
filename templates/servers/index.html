@@ -18,29 +18,43 @@
                 <p>ゆっくりしてね！！！</p>
             </div>
             <div class="row">
-                <p><strong>Game servers</strong></p>
-            </div>
-            <div class="row">
                 <div class="col cell1of1">
-                    <table>
+                    <table class="center">
                         <thead>
                             <tr>
                                 <!-- TODO: Service icon -->
                                 <th>Service</th>
-                                <th>Status / Uptime</th>
-                                <th>Website / Address</th>
+                                <th>Status</th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th></th>
                                 <th>Capacity</th>
-                                <th>Public</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
                             {{ range $server := .Servers}}
                             <tr>
-                                <td>{{ $server.Service }}</td>
-                                <td>Online (99%)</td>
-                                <td><a href="{{ $server.WebUrl }}">{{ $server.Name }}</a> ({{ $server.Address }})</td>
-                                <td>{{ $server.MaxPlayers }}</td>
-                                <td>{{ if $server.Locked }}Private{{ else }}Public{{end}}</td>
+                                <td>
+                                    <img class="server-icon" src="{{ $server.Image }}" alt="{{ $server.Service }}"/>
+                                </td>
+                                <td class="online">Online</td>
+                                <td><a href="{{ $server.WebUrl }}">{{ $server.Name }}</a></td>
+                                <td>{{ $server.Address }}</td>
+                                <td>
+                                    {{ if $server.Locked }}
+                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                    {{ else }}
+                                        <i class="fa fa-unlock" aria-hidden="true"></i>
+                                    {{end}}
+                                </td>
+                                <td>
+                                    {{ if $server.MaxPlayers }}
+                                        {{ $server.MaxPlayers }}
+                                    {{ else }}
+                                        ∞
+                                    {{ end }}
+                                </td>
                             </tr>
                             {{ end }}
                         </tbody>
@@ -49,15 +63,12 @@
             </div>
 
             <div class="row">
-                <p><strong>Infrastructure</strong></p>
-            </div>
-            <div class="row">
                 <div class="col cell1of1">
-                    <table>
+                    <table class="center">
                         <thead>
                         <tr>
                             <th>Hostname / IP</th>
-                            <th>Status / Uptime</th>
+                            <th>Status</th>
                             <th>OS</th>
                         </tr>
                         </thead>
@@ -65,7 +76,7 @@
                         {{ range $infrastructure := .Infrastructure}}
                             <tr>
                                 <td>{{ $infrastructure.Hostname }} ({{ $infrastructure.Address }})</td>
-                                <td>Online (99%)</td>
+                                <td class="online">Online</td>
                                 <td>{{ $infrastructure.Os }}</td>
                             </tr>
                         {{ end }}

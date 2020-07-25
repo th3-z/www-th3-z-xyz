@@ -5,6 +5,7 @@ var schema = `
             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
             name VARCHAR NOT NULL,
             address VARCHAR NOT NULL,
+            image VARCHAR NOT NULL,
             service VARCHAR NOT NULL,
             web_url VARCHAR NOT NULL,
             locked INT NOT NULL DEFAULT 0,
@@ -34,4 +35,3 @@ var schema = `
 			insert_date INTEGER NOT NULL
         );
 `
-
