@@ -57,7 +57,7 @@ func SeedDb(db *sql.DB) {
 	)
 	PreparedExec(
 		db, projectQuery,
-		"Gloom", "https://github.com/th3-z/gloom-client", "https://github.com/th3-z/gloom-client", "File upload utility and server", "Development",
+		"Gloom", "", "https://github.com/th3-z/gloom-client", "File upload utility and server", "Development",
 	)
 	PreparedExec(
 		db, projectQuery,
@@ -77,7 +77,7 @@ func SeedDb(db *sql.DB) {
 	)
 	PreparedExec(
 		db, projectQuery,
-		"Public website", "", "https://github.com/th3-z/beta-th3-z-xyz", "You're looking at it", "Development",
+		"Public website", "", "https://github.com/th3-z/www-th3-z-xyz", "This website you're currently viewing", "Development",
 	)
 
 	malgo.MigrateFile(db, "storage/th3-z-anime-list.xml")

@@ -9,7 +9,7 @@
             <div class="row">
                 <h1>Projects</h1>
                 <p>
-                    Selected works from my <a href="https://github.com/th3-z">Github profile</a>. All my projects are
+                    Selected works from my <a href="https://github.com/th3-z">Github profile</a>. All my work is
                     licensed MIT. Enjoy.
                 </p>
             </div>
@@ -20,7 +20,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Repository</th>
+                            <th></th>
                             <th>Status</th>
                         </tr>
                         </thead>
@@ -35,7 +35,7 @@
                                     {{end}}
                                 </td>
                                 <td>{{ $project.Description}}</td>
-                                <td><a href="{{ $project.RepoUrl }}">{{ $project.RepoUrl }}</a></td>
+                                <td><a href="{{ $project.RepoUrl }}">Source</a></td>
                                 <td>{{ $project.Status }}</td>
                             </tr>
                             {{ end }}
