@@ -1,4 +1,4 @@
-{{define "projects/index"}}
+{{define "software/index"}}
 <!DOCTYPE html>
 <html>
 {{template "head" .}}
@@ -7,7 +7,7 @@
     <div id="content">
         <div class="wrap home">
             <div class="row">
-                <h1>Projects</h1>
+                <h1>Software</h1>
                 <p>
                     Selected works from my <a href="https://github.com/th3-z">Github profile</a>. All my work is
                     licensed MIT. Enjoy.
@@ -25,18 +25,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                            {{ range $project := .Projects}}
+                            {{ range $software := .Software}}
                             <tr>
                                 <td>
-                                    {{ if eq $project.ProjectUrl "" }}
-                                        {{ $project.Name }}
+                                    {{ if eq $software.ProjectUrl "" }}
+                                        {{ $software.Name }}
                                     {{ else }}
-                                        <a href="{{ $project.ProjectUrl }}">{{ $project.Name }}</a>
+                                        <a href="{{ $software.ProjectUrl }}">{{ $software.Name }}</a>
                                     {{end}}
                                 </td>
-                                <td>{{ $project.Description}}</td>
-                                <td><a href="{{ $project.RepoUrl }}">Source</a></td>
-                                <td>{{ $project.Status }}</td>
+                                <td>{{ $software.Description}}</td>
+                                <td><a href="{{ $software.RepoUrl }}">Source</a></td>
+                                <td>{{ $software.Status }}</td>
                             </tr>
                             {{ end }}
                         </tbody>

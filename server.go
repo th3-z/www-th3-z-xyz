@@ -58,7 +58,7 @@ func routes(e *echo.Echo) {
 	e.GET("/articles", handlers.Articles)
 	e.GET("/live", handlers.Live)
 	e.GET("/servers", handlers.Servers)
-	e.GET("/projects", handlers.Projects)
+	e.GET("/software", handlers.Software)
 	e.GET("/anime", handlers.Anime)
 	e.GET("/pastes", handlers.Pastes)
 	e.POST("/pastes/new", handlers.NewPaste)

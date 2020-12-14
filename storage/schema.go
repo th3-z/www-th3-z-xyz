@@ -19,7 +19,7 @@ var schema = `
             os VARCHAR NOT NULL
         );
 
-		CREATE TABLE IF NOT EXISTS project (
+		CREATE TABLE IF NOT EXISTS software (
             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
             name VARCHAR NOT NULL,
             project_url VARCHAR NOT NULL,
