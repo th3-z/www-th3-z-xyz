@@ -1,7 +1,10 @@
 package storage
 
 import (
+	"crypto/sha256"
 	"database/sql"
+	"encoding/hex"
+	"time"
 
 	"github.com/th3-z/malgo"
 )
@@ -27,7 +30,22 @@ const softwareQuery = `
 		(?, ?, ?, ?, ?)
 `
 
+const userQuery = `
+	INSERT INTO person
+		(username, password, insert_date)
+	VALUES
+		(?, ?, ?)
+`
+
 func SeedDb(db *sql.DB) {
+	h := sha256.New()
+	h.Write([]byte("admin"))
+	adminPassword := hex.EncodeToString(h.Sum(nil))
+
+	PreparedExec(
+		db, userQuery, "admin", adminPassword, time.Now().Unix(),
+	)
+
 	PreparedExec(
 		db, serverQuery,
 		"Vanilluxe MC", "Minecraft", "vanilluxe.th3-z.xyz", "images/servers/mc.png", "https://vanilluxe.th3-z.xyz", 1, 6,
@@ -38,11 +56,15 @@ func SeedDb(db *sql.DB) {
 	)
 	PreparedExec(
 		db, serverQuery,
-		"Magicked Admin Dev Server (UK)", "Killing Floor 2", "saturn.th3-z.xyz", "images/servers/kf2.png", "https://saturn.th3-z.xyz", 0, 6,
+		"Magicked Admin Dev Server (UK)", "Killing Floor 2", "saturn.th3-z.xyz", "images/servers/kf2.png", "https://saturn.th3-z.xyz:9090", 0, 6,
 	)
 	PreparedExec(
 		db, serverQuery,
 		"Git", "Git", "git.th3-z.xyz", "images/servers/git.png", "https://git.th3-z.xyz", 0, 0,
+	)
+	PreparedExec(
+		db, serverQuery,
+		"Radio", "Radio", "radio.th3-z.xyz", "images/servers/radio.png", "https://radio.th3-z.xyz", 0, 0,
 	)
 
 	PreparedExec(

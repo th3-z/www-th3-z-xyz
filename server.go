@@ -1,18 +1,19 @@
 package main
 
 import (
-	"github.com/labstack/echo"
+	"fmt"
+	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
-	"io"
-    "time"
-    "fmt"
+	"time"
 
+	"github.com/labstack/echo"
+
+	"html/template"
 	"www-th3-z-xyz/handlers"
 	"www-th3-z-xyz/storage"
-	"html/template"
 )
 
 type Template struct {
@@ -62,6 +63,7 @@ func routes(e *echo.Echo) {
 	e.GET("/anime", handlers.Anime)
 	e.GET("/pastes", handlers.Pastes)
 	e.POST("/pastes/new", handlers.NewPaste)
+	e.POST("/login", handlers.Login)
 
 	e.Static("/styles", "static/styles")
 	e.Static("/scripts", "static/scripts")
@@ -71,9 +73,9 @@ func routes(e *echo.Echo) {
 }
 
 func main() {
-    t := time.Now().UTC()
+	t := time.Now().UTC()
 
-    os.Mkdir("static/pastes", 0775)
+	os.Mkdir("static/pastes", 0775)
 
 	storage.Db = storage.InitDB("storage.db")
 	defer storage.Db.Close()
@@ -89,6 +91,6 @@ func main() {
 	e.Renderer = tpl
 	routes(e)
 
-    fmt.Print("Start time: ", t.Format("Mon Jan 2 15:04:05"))
+	fmt.Print("Start time: ", t.Format("Mon Jan 2 15:04:05"))
 	e.Logger.Fatal(e.Start(":5555"))
 }

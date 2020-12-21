@@ -10,6 +10,7 @@ server
 
 # Generated
 static/pastes/*
+storage/sessions/*
 _*.html
 
 # Language

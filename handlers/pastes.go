@@ -3,17 +3,18 @@ package handlers
 import (
 	"crypto/sha256"
 	"encoding/hex"
-	"www-th3-z-xyz/models"
-	"github.com/labstack/echo"
 	"net/http"
+	"www-th3-z-xyz/models"
 	"www-th3-z-xyz/storage"
+
+	"github.com/labstack/echo"
 )
 
 func Pastes(c echo.Context) error {
 	data := struct {
-		Page models.Page
+		Page   models.Page
 		Pastes []models.Paste
-	} {
+	}{
 		Page: models.Page{
 			SelectedTab: 7,
 			Title:       "Pastes",
@@ -22,8 +23,8 @@ func Pastes(c echo.Context) error {
 		Pastes: models.GetPastes(),
 	}
 
-    c.Response().Header().Set("Cache-Control", "no-store, must-revalidate")
-    c.Response().Header().Set("Expires", "0")
+	c.Response().Header().Set("Cache-Control", "no-store, must-revalidate")
+	c.Response().Header().Set("Expires", "0")
 
 	return c.Render(http.StatusOK, "pastes/index", data)
 }

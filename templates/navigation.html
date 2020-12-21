@@ -1,6 +1,22 @@
 {{define "navigation"}}
 <header>
-    <a class="site-title" href="/"><img class="header-img" src="/images/header.png" alt="header image"></a>
+    <div style="height: 4.5em; background: linear-gradient(rgba(0,0,0,0), rgb(55, 55, 55) 100%, rgb(55, 55, 55)); margin-top: 0.5em">
+        <a href="/"><img class="header-img" src="/images/header.png" alt="header image"></a>
+        <form class="login-form">
+            {{if not .Page.Session.UserId}}
+            <input type="text" name="username" id="username" placeholder="Username"/>
+            <input type="password" name="password" id="password" placeholder="Password"/>
+            <button onclick="login(); return false;">
+                Sign in <i class="fas fa-sign-in-alt"></i>
+            </button>
+            {{else}}
+            <button>
+                Sign out <i class="fas fa-sign-out-alt"></i>
+            </button>
+            {{end}}
+        </form>
+    </div>
+    
     <nav>
         <label for="show-menu" class="show-menu">Show Menu</label>
         <input type="checkbox" id="show-menu"/>
@@ -14,11 +30,11 @@
             <li class="{{if eq .Page.SelectedTab 2}}active{{end}}">
                 <a href="/servers" >Servers</a>
             </li>
-            <li class="{{if eq .Page.SelectedTab 5}}active{{end}}">
-                <a href="/articles" >Articles</a>
-            </li>
             <li class="{{if eq .Page.SelectedTab 8}}active{{end}}">
                 <a href="/gallery" >Gallery</a>
+            </li>
+            <li class="{{if eq .Page.SelectedTab 5}}active{{end}}">
+                <a href="/articles" >Articles</a>
             </li>
             <!--<li class="{{if eq .Page.SelectedTab 4}}active{{end}}">
                 <a href="/anime" >Anime List</a>
