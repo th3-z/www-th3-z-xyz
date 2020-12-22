@@ -1,11 +1,11 @@
 
-function login() {
+function signin() {
     var username = document.getElementById("username");
     var password = document.getElementById("password");
 
     $.ajax({
         method: "POST",
-        url: "/login", 
+        url: "/signin", 
         data: {
             username: username.value,
             password: password.value
@@ -31,6 +31,16 @@ function login() {
                 }.bind(username, usernameValue, usernameStyle),
                 500
             );
+        }
+    });
+}
+
+function signout() {
+    $.ajax({
+        method: "POST",
+        url: "/signout",
+        success: function(data) {
+            location.reload();
         }
     });
 }

@@ -26,44 +26,7 @@ const sessionsPath = "storage/sessions"
 
 const sessionExpiration = 60 * 60 * 24 * 7
 
-func GetSession(c echo.Context) *Session {
-	var session *Session
-
-	sessionCookie, err := c.Cookie("sessionKey")
-	if err != nil {
-		// No session cookie
-		session = NewSession(c)
-		return session
-	}
-
-	h := sha256.New()
-	h.Write([]byte(c.Request().UserAgent() + c.RealIP() + sessionCookie.Value))
-	sessionFileName := sessionsPath + "/" + hex.EncodeToString(h.Sum(nil))
-
-	data, err := ioutil.ReadFile(sessionFileName)
-	if err != nil {
-		// No session file, expired or bad key
-		session = NewSession(c)
-		return session
-	}
-
-	if err = json.Unmarshal(data, &session); err != nil {
-		panic(err)
-	}
-
-	if session.Expires <= time.Now().Unix() {
-		// Session has expired
-		session = NewSession(c)
-		return session
-	}
-
-	session.LastActivity = time.Now().Unix()
-	session.Expires = time.Now().Unix() + sessionExpiration
-
-	return session
-}
-
-func NewSession(c echo.Context) *Session {
+func newSession(c echo.Context) *Session {
 	data := make([]byte, 32)
 	if _, err := rand.Read(data); err != nil {
 		panic(err)
@@ -79,8 +42,6 @@ func NewSession(c echo.Context) *Session {
 		SessionKey:   sessionKey,
 	}
 
-	WriteSession(c, &session)
-
 	cookie := new(http.Cookie)
 	cookie.Name = "sessionKey"
 	cookie.Value = sessionKey
@@ -93,7 +54,44 @@ func NewSession(c echo.Context) *Session {
 	return &session
 }
 
-func WriteSession(c echo.Context, session *Session) {
+func GetSession(c echo.Context) *Session {
+	var session *Session
+
+	sessionCookie, err := c.Cookie("sessionKey")
+	if err != nil {
+		// No session cookie
+		session = newSession(c)
+		return session
+	}
+
+	h := sha256.New()
+	h.Write([]byte(c.Request().UserAgent() + c.RealIP() + sessionCookie.Value))
+	sessionFileName := sessionsPath + "/" + hex.EncodeToString(h.Sum(nil))
+
+	data, err := ioutil.ReadFile(sessionFileName)
+	if err != nil {
+		// No session file, expired or bad key
+		session = newSession(c)
+		return session
+	}
+
+	if err = json.Unmarshal(data, &session); err != nil {
+		panic(err)
+	}
+
+	if session.Expires <= time.Now().Unix() {
+		// Session has expired
+		session = newSession(c)
+		return session
+	} else {
+		session.LastActivity = time.Now().Unix()
+		session.Expires = time.Now().Unix() + sessionExpiration
+	}
+
+	return session
+}
+
+func (session *Session) Write(c echo.Context) {
 	h := sha256.New()
 	h.Write([]byte(c.Request().UserAgent() + c.RealIP() + session.SessionKey))
 	sessionFileName := sessionsPath + "/" + hex.EncodeToString(h.Sum(nil))
@@ -111,4 +109,12 @@ func WriteSession(c echo.Context, session *Session) {
 
 	file.Truncate(0)
 	file.Write(sessionJson)
+}
+
+func (session *Session) Invalidate() {
+	session.Expires = 0
+}
+
+func reapSessions() {
+	// TODO
 }

@@ -63,7 +63,8 @@ func routes(e *echo.Echo) {
 	e.GET("/anime", handlers.Anime)
 	e.GET("/pastes", handlers.Pastes)
 	e.POST("/pastes/new", handlers.NewPaste)
-	e.POST("/login", handlers.Login)
+	e.POST("/signin", handlers.SignIn)
+	e.POST("/signout", handlers.SignOut)
 
 	e.Static("/styles", "static/styles")
 	e.Static("/scripts", "static/scripts")

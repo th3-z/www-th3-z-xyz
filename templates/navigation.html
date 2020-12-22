@@ -6,11 +6,11 @@
             {{if not .Page.Session.UserId}}
             <input type="text" name="username" id="username" placeholder="Username"/>
             <input type="password" name="password" id="password" placeholder="Password"/>
-            <button onclick="login(); return false;">
+            <button onclick="signin(); return false;">
                 Sign in <i class="fas fa-sign-in-alt"></i>
             </button>
             {{else}}
-            <button>
+            <button onclick="signout(); return false;">
                 Sign out <i class="fas fa-sign-out-alt"></i>
             </button>
             {{end}}

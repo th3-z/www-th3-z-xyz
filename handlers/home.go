@@ -9,7 +9,7 @@ import (
 
 func Index(c echo.Context) error {
 	session := models.GetSession(c)
-	defer models.WriteSession(c, session)
+	defer session.Write(c)
 
 	data := struct {
 		Page models.Page

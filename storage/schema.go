@@ -9,6 +9,12 @@ var schema = `
         deleted_date INTEGER DEFAULT 0
     );
 
+    CREATE TABLE IF NOT EXISTS signin_attempt (
+        id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        ip_address VARCHAR NOT NULL,
+        insert_date INTEGER NOT NULL
+    );
+
     CREATE TABLE IF NOT EXISTS server (
         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         name VARCHAR NOT NULL,
