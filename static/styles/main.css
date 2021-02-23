@@ -36,6 +36,12 @@
     padding: 0.2em;
 }
 
+@media only screen and (max-width: 390px) {
+    .login-form {
+        display: none;
+    }
+}
+
 .header-img {
     float: left;
     position: absolute;
@@ -106,6 +112,7 @@ hr {
 .row {
     padding: 0;
     margin: 0;
+    overflow-x:auto;
 }
 .row:before,
 .row:after {
@@ -205,7 +212,7 @@ hr {
   
     display: block;
     background: url("../images/bg.png") repeat scroll 0% 0%, #373737 none repeat scroll 0% 0%;
-    filter: brightness(60%) blur(1px);
+    filter: brightness(45%) blur(1px);
 
     width: 110%;
     height: 110%;
@@ -303,6 +310,12 @@ td:first-child {
 th:last-child,
 td:last-child {
     padding-right: 0; }
+
+@media only screen and (max-width: 700px) {
+    td {
+        padding: 0.1em 0.35em;
+    }
+}
 
 /* Spacing */
 article { margin: 0; }
