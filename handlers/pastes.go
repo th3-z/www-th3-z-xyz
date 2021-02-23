@@ -11,6 +11,9 @@ import (
 )
 
 func Pastes(c echo.Context) error {
+	session := models.GetSession(c)
+	defer session.Write(c)
+
 	data := struct {
 		Page   models.Page
 		Pastes []models.Paste
@@ -19,6 +22,7 @@ func Pastes(c echo.Context) error {
 			SelectedTab: 7,
 			Title:       "Pastes",
 			Id:          "pastes",
+			Session:     session,
 		},
 		Pastes: models.GetPastes(),
 	}
