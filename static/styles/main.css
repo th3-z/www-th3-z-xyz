@@ -17,12 +17,12 @@
     white-space: nowrap;
     float: right;
     position: relative;
-    top: 2.7em;
+    top: 2.03em;
     margin-right: 0.2em;
 }
 .login-form input[type="password"], input[type="text"] {
     color: #bbb;
-    background-color: #373737;
+    background-color: #212121;
     width: 7.5em;
     border-radius: 0;
     border-style: none;
@@ -30,7 +30,7 @@
 }
 .login-form button {
     color: #bbb;
-    background-color: #373737;
+    background-color: #212121;
     border-radius: 0;
     border-style: none;
     padding: 0.2em;
@@ -47,7 +47,6 @@
     position: absolute;
     z-index: 1;
     margin: 0;
-    top: 0.67em;
     image-rendering: crisp-edges;
 }
 
@@ -211,8 +210,8 @@ hr {
     z-index: -1;
   
     display: block;
-    background: url("../images/bg.png") repeat scroll 0% 0%, #373737 none repeat scroll 0% 0%;
-    filter: brightness(45%) blur(1px);
+    background: url("../images/bg.png") repeat scroll 0% 0%, #212121 none repeat scroll 0% 0%;
+    filter: brightness(35%) blur(1px);
 
     width: 110%;
     height: 110%;
@@ -334,8 +333,8 @@ figure,
 table,
 p,
 ul,
-ol,
-form {
+ol 
+{
     margin-bottom: 1.5em; }
 
 /* Header */
@@ -347,7 +346,7 @@ header span { position: absolute !important; top: -9999em !important; left: -999
 
 /* Navigation */
 nav { position: relative; }
-nav ul { background: #373737; list-style: none; margin: 0; text-align: center; width: 100%; }
+nav ul { background: #212121; list-style: none; margin: 0; text-align: center; width: 100%; }
 nav ul li { display: inline-block; margin: 0; }
 nav ul li a,
 nav ul li a:visited,
@@ -362,7 +361,7 @@ nav li ul li { display: block; float: none; }
 nav li ul li a { min-width: 8em; width: auto; }
 nav ul li a:hover + .sub, .sub:hover { display: block; }
 
-.show-menu { text-decoration: none; color: #fff; background: #373737; text-align: center; padding: .4em 0; display: none; }
+.show-menu { text-decoration: none; color: #fff; background: #212121; text-align: center; padding: .4em 0; display: none; }
 
 nav input[type=checkbox] { display: none; -webkit-appearance: none; }
 nav input[type=checkbox]:checked ~ ul { display: block; }
@@ -383,7 +382,7 @@ nav input[type=checkbox]:checked ~ ul { display: block; }
 
 /* Footer */
 footer {
-    background: #373737;
+    background: #212121;
     color: #BBB;
     font-size: 0.9em;
     margin: 0 -2.2em -3em;
