@@ -37,6 +37,8 @@ func findAndParseTemplates(rootDir string, funcMap template.FuncMap) (*template.
 			}
 
 			name := path[pfx:]
+			print(name)
+			print("\n")
 			t := root.New(name).Funcs(funcMap)
 			t, e2 = t.Parse(string(b))
 			if e2 != nil {
@@ -56,7 +58,7 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 
 func routes(e *echo.Echo) {
 	e.GET("/", handlers.Index)
-	e.GET("/articles", handlers.Articles)
+	e.GET("/articles", handlers.Article)
 	e.GET("/live", handlers.Live)
 	e.GET("/servers", handlers.Servers)
 	e.GET("/software", handlers.Software)

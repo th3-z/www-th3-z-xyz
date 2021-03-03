@@ -1,0 +1,17 @@
+{{define "articles/base"}}
+<!DOCTYPE html>
+<html>
+{{template "head" .}}
+<body class="container" id="{{ .Page.Id}}">
+    {{template "navigation" .}}
+    <div id="content">
+        <div class="wrap home">
+            <div class="row">
+                {{ .Content }}
+            </div>
+        </div>
+    </div>
+    {{template "footer" .}}
+</body>
+</html>
+{{end}}
