@@ -2,6 +2,7 @@ package models
 
 import (
 	"bufio"
+	"html/template"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -14,7 +15,7 @@ type Article struct {
 	Date           time.Time
 	Title          string
 	Description    string
-	IconFilename   string
+	IconUrl        string
 	SourceFilename string
 	OutputFilename string
 }
@@ -28,7 +29,7 @@ type meta struct {
 }
 
 const srcPath string = "templates/articles/_src"
-const outPath string = "templates/articles"
+const outPath string = "templates/articles/_out"
 const baseTemplatePath string = "templates/articles/base.html"
 
 func readMeta(filename string) *meta {
@@ -86,9 +87,9 @@ func GetArticles(path string) []Article {
 		article.Date = date
 		article.Title = meta.Title
 		article.Description = meta.Description
-		article.IconFilename = "/images/articles/" + f.Name() + "/" + meta.Icon
+		article.IconUrl = "/articles/res/" + f.Name() + "/" + meta.Icon
 		article.SourceFilename = srcPath + "/" + article.Name + "/" + meta.Content
-		article.OutputFilename = outPath + "/" + article.Name + "/" + strings.Split(meta.Content, ".")[0] + ".html"
+		article.OutputFilename = outPath + "/" + strings.Split(meta.Content, ".")[0] + ".html"
 
 		articles = append(articles, article)
 
@@ -102,13 +103,34 @@ func GetArticles(path string) []Article {
 	return articles
 }
 
-func (article Article) Content() *string {
+func GetArticle(name string) *Article {
+	var article Article
+
+	meta := readMeta(srcPath + "/" + name + "/meta")
+
+	date, err := time.Parse("2006-01-02", meta.Date)
+	if err != nil {
+		panic(err)
+	}
+
+	article.Name = name
+	article.Date = date
+	article.Title = meta.Title
+	article.Description = meta.Description
+	article.IconUrl = "/articles/res/" + article.Name + "/" + meta.Icon
+	article.SourceFilename = srcPath + "/" + article.Name + "/" + meta.Content
+	article.OutputFilename = outPath + "/" + strings.Split(meta.Content, ".")[0] + ".html"
+
+	return &article
+}
+
+func (article Article) Content() *template.HTML {
 	content, err := ioutil.ReadFile(article.OutputFilename)
 	if err != nil {
 		panic(err)
 	}
 
-	contentStr := string(content)
+	contentStr := template.HTML(string(content))
 
 	return &contentStr
 }
@@ -116,27 +138,32 @@ func (article Article) Content() *string {
 func (article Article) Bake() {
 	aSrcPath := srcPath + "/" + article.Name
 	aOutPath := outPath + "/" + article.Name
+	aResPath := "static/articles/" + article.Name
 	os.Mkdir(aOutPath, 0755)
+	os.Mkdir(aResPath, 0755)
 
 	srcFiles, err := ioutil.ReadDir(aSrcPath)
 	if err != nil {
 		panic(err)
 	}
 
+	// Copy static resources
 	for _, f := range srcFiles {
 		if f.IsDir() {
 			continue
 		}
-		utils.Copy(aSrcPath+"/"+f.Name(), aOutPath+"/"+f.Name())
+
+		if !(strings.HasSuffix(f.Name(), ".md") || f.Name() == "meta") {
+			utils.Copy(aSrcPath+"/"+f.Name(), aResPath+"/"+f.Name())
+		}
 	}
 
 	html := utils.MdToHtml(article.SourceFilename)
-
 	outputFile, err := os.Create(article.OutputFilename)
 	defer outputFile.Close()
 
 	outputFile.Write(*html)
-	writer := bufio.NewWriter(outputFile)
-	writer.Write(*html)
-	writer.Flush()
+	//writer := bufio.NewWriter(outputFile)
+	//writer.Write(*html)
+	//writer.Flush()
 }

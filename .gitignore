@@ -11,6 +11,9 @@ server
 # Generated
 static/pastes/*
 storage/sessions/*
+templates/articles/_out/*
+templates/articles/_src/*
+static/articles/*
 _*.html
 
 # Language

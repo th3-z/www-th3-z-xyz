@@ -10,7 +10,9 @@
                 <h1>Articles</h1>
                 <p>What I write.</p>
                 <ul>
-                    <li><a href="articles/post0.html">post0</a></li>
+                    {{ range $article := .Articles }}
+                        <li><img src="{{ $article.IconUrl }}" alt="icon" width="64" height="64"/><a href="articles/{{ $article.Name }}">{{ $article.Title }}</a> - {{ $article.Date.Format "2 Jan 2006" }}</li>
+                    {{ end }}
                 </ul>
             </div>
         </div>

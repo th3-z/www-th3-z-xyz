@@ -6,8 +6,10 @@
     {{template "navigation" .}}
     <div id="content">
         <div class="wrap home">
+            <h1>{{ .Article.Title }}</h1>
+            <p> {{ .Article.Description }}</p>
             <div class="row">
-                {{ .Content }}
+                {{ .Article.Content }}
             </div>
         </div>
     </div>
