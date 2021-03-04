@@ -89,7 +89,7 @@ func GetArticles(path string) []Article {
 		article.Description = meta.Description
 		article.IconUrl = "/articles/res/" + f.Name() + "/" + meta.Icon
 		article.SourceFilename = srcPath + "/" + article.Name + "/" + meta.Content
-		article.OutputFilename = outPath + "/" + strings.Split(meta.Content, ".")[0] + ".html"
+		article.OutputFilename = outPath + "/" + article.Name + ".html"
 
 		articles = append(articles, article)
 
@@ -119,7 +119,7 @@ func GetArticle(name string) *Article {
 	article.Description = meta.Description
 	article.IconUrl = "/articles/res/" + article.Name + "/" + meta.Icon
 	article.SourceFilename = srcPath + "/" + article.Name + "/" + meta.Content
-	article.OutputFilename = outPath + "/" + strings.Split(meta.Content, ".")[0] + ".html"
+	article.OutputFilename = outPath + "/" + article.Name + ".html"
 
 	return &article
 }
@@ -137,9 +137,7 @@ func (article Article) Content() *template.HTML {
 
 func (article Article) Bake() {
 	aSrcPath := srcPath + "/" + article.Name
-	aOutPath := outPath + "/" + article.Name
 	aResPath := "static/articles/" + article.Name
-	os.Mkdir(aOutPath, 0755)
 	os.Mkdir(aResPath, 0755)
 
 	srcFiles, err := ioutil.ReadDir(aSrcPath)
