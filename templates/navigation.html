@@ -46,9 +46,11 @@
             <li class="{{if eq .Page.SelectedTab 6}}active{{end}}" style="float: right">
                 <a href="/live" ><i class="fas fa-desktop"></i></a>
             </li>
+            {{ if .Page.Session.UserId }}
             <li class="{{if eq .Page.SelectedTab 7}}active{{end}}" style="float: right">
                 <a href="/pastes" ><i class="fas fa-paste"></i></a>
             </li>
+            {{ end }}
 
         </ul>
     </nav>

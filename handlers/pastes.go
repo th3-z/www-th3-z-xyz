@@ -14,6 +14,10 @@ func Pastes(c echo.Context) error {
 	session := models.GetSession(c)
 	defer session.Write(c)
 
+	if !(session.UserId > 0) {
+		return c.NoContent(http.StatusForbidden)
+	}
+
 	data := struct {
 		Page   models.Page
 		Pastes []models.Paste
@@ -34,6 +38,13 @@ func Pastes(c echo.Context) error {
 }
 
 func NewPaste(c echo.Context) error {
+	session := models.GetSession(c)
+	defer session.Write(c)
+
+	if !(session.UserId > 0) {
+		return c.NoContent(http.StatusForbidden)
+	}
+
 	content := []byte(c.FormValue("content"))
 
 	h := sha256.New()
