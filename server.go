@@ -59,7 +59,8 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 func routes(e *echo.Echo) {
 	e.GET("/", handlers.Index)
 	e.GET("/articles", handlers.Articles)
-	e.GET("/articles/*", handlers.Article)
+	e.GET("/articles/:name", handlers.Article)
+	e.POST("/articles/:name/src", handlers.ArticleSrc)
 	e.GET("/live", handlers.Live)
 	e.GET("/servers", handlers.Servers)
 	e.GET("/software", handlers.Software)

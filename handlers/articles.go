@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"www-th3-z-xyz/models"
 
+	"io/ioutil"
 	"strings"
 
 	"github.com/labstack/echo"
@@ -55,4 +56,25 @@ func Article(c echo.Context) error {
 	}
 
 	return c.Render(http.StatusOK, "articles/base", data)
+}
+
+func ArticleSrc(c echo.Context) error {
+	print("asdasd")
+	session := models.GetSession(c)
+	defer session.Write(c)
+
+	path := strings.Split(c.Request().RequestURI, "/")
+	articleName := path[len(path)-2]
+
+	article := models.GetArticle(articleName)
+	/*if err != nil { FIXME
+		return c.NoContent(http.StatusBadRequest)
+	}*/
+
+	src, err := ioutil.ReadFile(article.SourceFilename)
+	if err != nil {
+		panic(err)
+	}
+
+	return c.JSON(http.StatusOK, string(src))
 }

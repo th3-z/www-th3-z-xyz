@@ -9,19 +9,19 @@
             <h1>Articles</h1>
             <p>What I've write.</p>
             <div class="row">
+                {{ range $article := .Articles }}
                 <div class="article">
-                    {{ range $article := .Articles }}
-                        <img src="{{ $article.IconUrl }}" alt="icon" width="48" height="48" style="float: left;"/>
-                        <div>
-                            <h2 style="margin: 0;">
-                                <a href="articles/{{ $article.Name }}">{{ $article.Title }}</a>
-                            </h2>
-                            <small>{{ $article.Date.Format "2 Jan 2006" }}</small>
-                        </div>
-                        <p>{{ $article.Description }}</p>
-                        <hr/>
-                    {{ end }}
+                    <hr/>
+                    <img src="{{ $article.IconUrl }}" alt="icon" width="48" height="48" style="float: left;"/>
+                    <div>
+                        <h2 style="margin: 0;">
+                            <a href="articles/{{ $article.Name }}">{{ $article.Title }}</a>
+                        </h2>
+                        <small>{{ $article.Date.Format "2 Jan 2006" }}</small>
+                    </div>
+                    <p>{{ $article.Description }}</p>
                 </div>
+                {{ end }}
             </div>
         </div>
     </div>

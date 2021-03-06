@@ -6,9 +6,23 @@
     {{template "navigation" .}}
     <div id="content">
         <div class="wrap home">
-            <h1>{{ .Article.Title }}</h1>
-            <p> {{ .Article.Description }}</p>
-            <div class="row">
+            <h1 style="float: left">{{ .Article.Title }}</h1>
+            {{ if .Page.Session.UserId }}
+            <div style="float: right">
+                <ul>
+                    <li><a id="btn_edit" onclick="editArticle({{ .Article.Name }})"><i class="fas fa-edit"></i></a></li>
+                    <li><a id="btn_delete" onclick="DeleteArticle({{ .Article.Name }})"><i class="fas fa-trash"></i></a></li>
+                    <li><a id="btn_save" onclick="SaveArticle({{ .Article.Name }})"><i class="fas fa-save"></i></a></li>
+                    <li>
+                        <input type="checkbox" id="chk_visible" onclick="toggleVisible()"/>
+                        <label for="chk_visible">Visible</label>
+                        
+                    </li>
+                </ul>
+            </div>
+            {{ end }}
+            <p style="clear: both"> {{ .Article.Description }}</p>
+            <div class="row" id="article_content">
                 {{ .Article.Content }}
             </div>
         </div>
