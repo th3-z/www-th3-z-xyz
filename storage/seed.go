@@ -60,6 +60,10 @@ func SeedDb(db *sql.DB) {
 	)
 	PreparedExec(
 		db, serverQuery,
+		"Mumble", "VoIP", "th3-z.xyz", "images/servers/mumble.png", "", 1, 25,
+	)
+	PreparedExec(
+		db, serverQuery,
 		"Git", "Git", "git.th3-z.xyz", "images/servers/git.png", "https://git.th3-z.xyz", 0, 0,
 	)
 	PreparedExec(
