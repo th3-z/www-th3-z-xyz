@@ -59,7 +59,6 @@ func Article(c echo.Context) error {
 }
 
 func ArticleSrc(c echo.Context) error {
-	print("asdasd")
 	session := models.GetSession(c)
 	defer session.Write(c)
 
@@ -77,4 +76,28 @@ func ArticleSrc(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, string(src))
+}
+
+func ArticleVisibility(c echo.Context) error {
+	session := models.GetSession(c)
+	defer session.Write(c)
+
+	path := strings.Split(c.Request().RequestURI, "/")
+	articleName := path[len(path)-2]
+	visible := c.FormValue("visible")
+
+	article := models.GetArticle(articleName)
+	/*if err != nil { FIXME
+		return c.NoContent(http.StatusBadRequest)
+	}*/
+
+	if visible == "true" {
+		article.Meta.Visible = "1"
+	} else {
+		article.Meta.Visible = "0"
+	}
+
+	article.Meta.Write()
+
+	return c.NoContent(http.StatusOK)
 }

@@ -13,7 +13,13 @@ function saveArticle(name) {
 }
 
 function deleteArticle(name) {
-    console.log(name)
+    $.ajax({
+        method: "POST",
+        url: "/articles/" + name + "/delete",
+        success: function(data) {
+            alert("article deleted")
+        }
+    });
 }
 
 function getSrc(name) {
@@ -21,9 +27,30 @@ function getSrc(name) {
         method: "POST",
         url: "/articles/" + name + "/src",
         success: function(data) {
-
             emEdit = document.getElementById("article_edit")
             emEdit.innerHTML = data
+        }
+    });
+}
+
+function visibleArticle(name) {
+    let btnVisible = document.getElementById("btn_visible")
+    let isVisible = btnVisible.dataset.visible != "0"
+
+    $.ajax({
+        method: "POST",
+        url: "/articles/" + name + "/set_visible",
+        data: {
+            visible: !isVisible
+        },
+        success: function() {
+            if (isVisible) {
+                btnVisible.innerHTML = "<i class=\"fas fa-eye-slash\">"
+                btnVisible.dataset.visible = "0"
+            } else {
+                btnVisible.innerHTML = "<i class=\"fas fa-eye\">"
+                btnVisible.dataset.visible = "1"
+            }
         }
     });
 }

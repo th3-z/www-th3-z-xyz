@@ -61,6 +61,7 @@ func routes(e *echo.Echo) {
 	e.GET("/articles", handlers.Articles)
 	e.GET("/articles/:name", handlers.Article)
 	e.POST("/articles/:name/src", handlers.ArticleSrc)
+	e.POST("/articles/:name/set_visible", handlers.ArticleVisibility)
 	e.GET("/live", handlers.Live)
 	e.GET("/servers", handlers.Servers)
 	e.GET("/software", handlers.Software)

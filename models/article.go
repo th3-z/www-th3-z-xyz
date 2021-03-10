@@ -18,14 +18,18 @@ type Article struct {
 	IconUrl        string
 	SourceFilename string
 	OutputFilename string
+	Visible        bool
+	Meta           *meta
 }
 
 type meta struct {
+	Filename    string
 	Date        string
 	Title       string
 	Description string
 	Content     string
 	Icon        string
+	Visible     string
 }
 
 const srcPath string = "templates/articles/_src"
@@ -40,6 +44,7 @@ func readMeta(filename string) *meta {
 	defer f.Close()
 
 	var meta meta
+	meta.Filename = filename
 	scanner := bufio.NewScanner(f)
 
 	for scanner.Scan() {
@@ -61,10 +66,27 @@ func readMeta(filename string) *meta {
 			meta.Content = strings.TrimSpace(parts[1])
 		case "icon":
 			meta.Icon = strings.TrimSpace(parts[1])
+		case "visible":
+			meta.Visible = strings.TrimSpace(parts[1])
 		}
 	}
 
 	return &meta
+}
+
+func (meta meta) Write() {
+	file, err := os.OpenFile(meta.Filename, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0755)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	file.WriteString("date: " + meta.Date + "\n")
+	file.WriteString("title: " + meta.Title + "\n")
+	file.WriteString("description: " + meta.Description + "\n")
+	file.WriteString("content: " + meta.Content + "\n")
+	file.WriteString("icon: " + meta.Icon + "\n")
+	file.WriteString("visible: " + meta.Visible + "\n")
 }
 
 func GetArticles(path string) []Article {
@@ -90,6 +112,8 @@ func GetArticles(path string) []Article {
 		article.IconUrl = "/articles/res/" + f.Name() + "/" + meta.Icon
 		article.SourceFilename = srcPath + "/" + article.Name + "/" + meta.Content
 		article.OutputFilename = outPath + "/" + article.Name + ".html"
+		article.Visible = meta.Visible != "0"
+		article.Meta = meta
 
 		articles = append(articles, article)
 
@@ -120,6 +144,8 @@ func GetArticle(name string) *Article {
 	article.IconUrl = "/articles/res/" + article.Name + "/" + meta.Icon
 	article.SourceFilename = srcPath + "/" + article.Name + "/" + meta.Content
 	article.OutputFilename = outPath + "/" + article.Name + ".html"
+	article.Visible = meta.Visible != "0"
+	article.Meta = meta
 
 	return &article
 }
@@ -161,7 +187,4 @@ func (article Article) Bake() {
 	defer outputFile.Close()
 
 	outputFile.Write(*html)
-	//writer := bufio.NewWriter(outputFile)
-	//writer.Write(*html)
-	//writer.Flush()
 }
